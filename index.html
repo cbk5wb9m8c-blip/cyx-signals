@@ -240,15 +240,6 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .fader-pos.active .fp-sub{color:rgba(180,140,210,.5)}
 
 /* ═══════════ PAGE TRANSITIONS ═══════════ */
-.section.cinema-in{animation:filmWipe .6s ease}
-.section.groove-in{animation:vinylReveal .6s ease}
-.section.cut-in{animation:waveSweep .55s ease}
-.section.signal-in{animation:signalRings .6s ease}
-@keyframes filmWipe{0%{opacity:0;clip-path:inset(0 100% 0 0)}40%{opacity:0;clip-path:inset(0 40% 0 60%)}100%{opacity:1;clip-path:inset(0 0 0 0)}}
-@keyframes vinylReveal{0%{opacity:0;clip-path:circle(0% at 50% 50%)}60%{opacity:.5}100%{opacity:1;clip-path:circle(100% at 50% 50%)}}
-@keyframes waveSweep{0%{opacity:0;clip-path:inset(0 100% 0 0)}50%{opacity:.6}100%{opacity:1;clip-path:inset(0 0 0 0)}}
-@keyframes signalRings{0%{opacity:0;transform:scale(.9);filter:blur(4px)}50%{opacity:.8}100%{opacity:1;transform:scale(1);filter:blur(0)}}
-
 /* Console active state (source section is transparent overlay) */
 #sec-source.active{display:block;position:absolute;inset:0;pointer-events:none}
 
@@ -455,44 +446,6 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .cinema-section-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
 .cinema-section-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(123,94,167,.02) 0%,transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(100,80,140,.015) 0%,transparent 50%)}
 
-/* ═══════════ NARRATION SUBTITLE ═══════════ */
-.narration-bar{position:fixed;bottom:200px;left:50%;transform:translateX(-50%);z-index:200;pointer-events:none;opacity:0;transition:opacity .8s ease,transform .8s cubic-bezier(.25,.8,.25,1)}
-.narration-bar.visible{opacity:1;transform:translateX(-50%) translateY(-8px)}
-.narration-bar.fading{opacity:0;transform:translateX(-50%) translateY(-20px)}
-.narration-text{font-size:13px;color:rgba(255,255,255,.6);letter-spacing:.15em;text-align:center;text-shadow:0 0 20px rgba(123,94,167,.3);white-space:nowrap}
-.narration-line{width:60px;height:1px;background:rgba(123,94,167,.25);margin:10px auto 0}
-
-/* ═══════════ CHANNEL CROSSTALK ═══════════ */
-.section.ghost{display:block;position:absolute;inset:0;pointer-events:none;opacity:.06;filter:blur(1px);transform:scale(.98);transition:opacity .8s ease,filter .8s ease}
-.section.ghost-strong{opacity:.12;filter:blur(.5px)}
-
-/* ═══════════ FADER DRAG ENHANCEMENT ═══════════ */
-.fader-pos.dragging{background:rgba(123,94,167,.12);box-shadow:0 0 24px rgba(123,94,167,.15),0 0 0 1px rgba(123,94,167,.2) inset;transform:translateY(-4px)}
-.fader-pos.dragging .fp-cap{background:rgba(180,140,210,.8);box-shadow:0 0 20px rgba(123,94,167,.5)}
-.fader-pos.dragging .fp-fill{background:linear-gradient(to top,rgba(123,94,167,.7),rgba(180,140,210,.4));box-shadow:0 0 14px rgba(123,94,167,.4)}
-.fader-pos.preheating{background:rgba(255,255,255,.03)}
-.fader-pos.preheating .fp-cap{background:rgba(255,255,255,.35);box-shadow:0 0 10px rgba(123,94,167,.2)}
-.fader-pos.preheating .fp-label{color:rgba(255,255,255,.5)}
-.fader-pos.preheating .fp-fill{height:35%;background:rgba(123,94,167,.2)}
-.fp-ghost{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;border-radius:14px}
-.fader-pos.preheating .fp-ghost{opacity:1;box-shadow:0 0 40px rgba(123,94,167,.08),0 0 80px rgba(123,94,167,.04)}
-.fader-pos.dragging .fp-ghost{opacity:1;box-shadow:0 0 60px rgba(123,94,167,.15),0 0 120px rgba(123,94,167,.06)}
-
-/* ═══════════ CINEMATIC TRANSITION OVERLAY ═══════════ */
-.transition-overlay{position:fixed;inset:0;z-index:5000;pointer-events:none;opacity:0}
-.transition-overlay.active{opacity:1}
-.transition-beam{position:absolute;top:0;left:-20%;width:60%;height:100%;background:linear-gradient(105deg,transparent 0%,rgba(232,232,232,.06) 40%,rgba(232,232,232,.12) 50%,rgba(232,232,232,.06) 60%,transparent 100%);transform:skewX(-8deg);animation:beamSweep 1s ease-in-out}
-@keyframes beamSweep{0%{left:-30%}100%{left:110%}}
-.transition-vinyl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(232,150,12,.15);animation:vinylExpand .8s ease-in-out forwards;opacity:0}
-@keyframes vinylExpand{0%{width:0;height:0;opacity:.6}100%{width:200vmax;height:200vmax;opacity:0}}
-.transition-waveform{position:absolute;top:50%;left:0;right:0;height:60px;transform:translateY(-50%);opacity:0}
-.transition-waveform.active{animation:waveSweepAnim .7s ease-in-out forwards}
-@keyframes waveSweepAnim{0%{opacity:.4;clip-path:inset(0 100% 0 0)}100%{opacity:0;clip-path:inset(0 0 0 0)}}
-.transition-radar{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(94,167,200,.2);animation:radarPing .9s ease-out forwards;opacity:0}
-@keyframes radarPing{0%{width:10px;height:10px;opacity:.5}100%{width:300vmax;height:300vmax;opacity:0}}
-.transition-flash{position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .5s ease}
-.transition-flash.active{opacity:1;transition:opacity .1s ease}
-
 /* ═══════════ SECTION: dark background override ═══════════ */
 #sec-cinema.active{background:#080808;position:relative;z-index:1;padding:40px 48px;min-height:100%}
 
@@ -605,8 +558,6 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 
 </div>
 
-<!-- ═══════════ TRANSITION OVERLAY ═══════════ -->
-<div class="transition-overlay" id="transitionOverlay" style="display:none"></div>
 
 <!-- ═══════════ MAIN APP ═══════════ -->
 <div id="app">
@@ -837,25 +788,6 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
     </section>
   </main>
 
-  <!-- Channel narration subtitle -->
-  <div class="narration-bar" id="narrationBar">
-    <span class="narration-text" id="narrationText"></span>
-    <div class="narration-line"></div>
-  </div>
-
-  <!-- Cinematic transition overlay -->
-  <div class="transition-overlay" id="transitionOverlay">
-    <div class="transition-beam" id="transBeam"></div>
-    <div class="transition-vinyl" id="transVinyl"></div>
-    <div class="transition-waveform" id="transWaveform">
-      <svg width="100%" height="60" viewBox="0 0 800 60" preserveAspectRatio="none">
-        <path d="M0 30 Q20 10 40 30 T80 30 T120 30 T160 30 T200 30 Q220 50 240 30 T280 30 T320 30 T360 30 T400 30 Q420 10 440 30 T480 30 T520 30 T560 30 T600 30 Q620 50 640 30 T680 30 T720 30 T760 30 T800 30" fill="none" stroke="rgba(123,94,167,.4)" stroke-width="1"/>
-      </svg>
-    </div>
-    <div class="transition-radar" id="transRadar"></div>
-    <div class="transition-flash" id="transFlash"></div>
-  </div>
-
   <!-- FADER NAVIGATION — 5 vertical glass faders -->
   <div class="fader-nav" id="faderNav">
     <!-- Decorative elements -->
@@ -887,31 +819,31 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
     <div class="fader-row" id="faderRow">
       <div class="fader-pos active" data-target="source">
         <div class="fp-cap"></div>
-        <div class="fp-track"><div class="fp-fill"></div></div><div class="fp-ghost"></div>
+        <div class="fp-track"><div class="fp-fill"></div></div>
         <span class="fp-label">00 SOURCE</span>
         <span class="fp-sub">自我</span>
       </div>
       <div class="fader-pos" data-target="cinema">
         <div class="fp-cap"></div>
-        <div class="fp-track"><div class="fp-fill"></div></div><div class="fp-ghost"></div>
+        <div class="fp-track"><div class="fp-fill"></div></div>
         <span class="fp-label">01 CINEMA</span>
         <span class="fp-sub">影像</span>
       </div>
       <div class="fader-pos" data-target="groove">
         <div class="fp-cap"></div>
-        <div class="fp-track"><div class="fp-fill"></div></div><div class="fp-ghost"></div>
+        <div class="fp-track"><div class="fp-fill"></div></div>
         <span class="fp-label">02 GROOVE</span>
         <span class="fp-sub">音乐</span>
       </div>
       <div class="fader-pos" data-target="cut">
         <div class="fp-cap"></div>
-        <div class="fp-track"><div class="fp-fill"></div></div><div class="fp-ghost"></div>
+        <div class="fp-track"><div class="fp-fill"></div></div>
         <span class="fp-label">03 CUT</span>
         <span class="fp-sub">剪辑</span>
       </div>
       <div class="fader-pos" data-target="signal">
         <div class="fp-cap"></div>
-        <div class="fp-track"><div class="fp-fill"></div></div><div class="fp-ghost"></div>
+        <div class="fp-track"><div class="fp-fill"></div></div>
         <span class="fp-label">04 SIGNAL</span>
         <span class="fp-sub">联系</span>
       </div>
@@ -945,35 +877,10 @@ const EQ_BANDS = [
 // ═══════════ STATE ═══════════
 let currentSection = "source";
 let channelIntensity = 1; // 0–1, driven by fader drag
-let isDraggingFader = false;
 let activeSubSection = null; // cinema chapter / groove track / cut case index
 let activeSongId = null;
 let activeCaseIndex = 0;
 let meterAnimId = null;
-let narrationTimer = null;
-
-// ═══════════ NARRATION ═══════════
-const CHANNEL_NARRATIONS = {
-  source: '信号成为影像之前，我先成为自己。',
-  cinema: '让一个镜头，完成一次叙事呼吸。',
-  groove: '记忆不是文字，是有速度的声音。',
-  cut: '剪辑不是拼接，是信息的节奏化。',
-  signal: '当作品完成，信号开始寻找回应。'
-};
-
-function showNarration(channel) {
-  const bar = document.getElementById('narrationBar');
-  const text = document.getElementById('narrationText');
-  if (!bar || !text) return;
-  clearTimeout(narrationTimer);
-  text.textContent = CHANNEL_NARRATIONS[channel] || '';
-  bar.classList.remove('fading');
-  bar.classList.add('visible');
-  narrationTimer = setTimeout(() => {
-    bar.classList.add('fading');
-    narrationTimer = setTimeout(() => bar.classList.remove('visible', 'fading'), 800);
-  }, 3000);
-}
 
 // ═══════════ SOUND ENGINE ═══════════
 class SoundEngine {
@@ -2081,70 +1988,17 @@ function startFaderDecoAnim() {
 function initFaderDrag() {
   document.querySelectorAll('.fader-pos').forEach(fader => {
     const target = fader.getAttribute('data-target');
-    const track = fader.querySelector('.fp-track');
-    const fill = fader.querySelector('.fp-fill');
-    let dragStartY = 0;
-    let dragLevel = target === currentSection ? 0.92 : 0.08;
 
     fader.addEventListener('mouseenter', () => {
-      if (!isDraggingFader) {
-        fader.classList.add('preheating');
-        soundEngine.playHover();
-      }
+      fader.classList.add('preheating');
+      soundEngine.playHover();
     });
 
     fader.addEventListener('mouseleave', () => {
-      if (!isDraggingFader) {
-        fader.classList.remove('preheating');
-        if (target !== currentSection) {
-          fill.style.height = '8%';
-        }
-      }
-    });
-
-    fader.addEventListener('mousedown', (e) => {
-      isDraggingFader = true;
-      dragStartY = e.clientY;
-      fader.classList.add('dragging');
       fader.classList.remove('preheating');
-      e.preventDefault();
     });
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isDraggingFader) return;
-      const rect = track.getBoundingClientRect();
-      const trackTop = rect.top;
-      const trackBottom = rect.bottom;
-      const y = Math.max(trackTop, Math.min(trackBottom, e.clientY));
-      dragLevel = 1 - ((y - trackTop) / (trackBottom - trackTop));
-      dragLevel = Math.max(0.02, Math.min(1, dragLevel));
-      fill.style.height = (dragLevel * 100) + '%';
-      document.documentElement.style.setProperty('--ch-intensity', dragLevel);
-
-      // Channel crosstalk: adjust ghost sections
-      if (dragLevel > 0.5 && target !== currentSection) {
-        updateCrosstalk(target, dragLevel);
-      }
-    });
-
-    document.addEventListener('mouseup', () => {
-      if (!isDraggingFader) return;
-      isDraggingFader = false;
-      document.querySelectorAll('.fader-pos').forEach(f => f.classList.remove('dragging'));
-      document.documentElement.style.setProperty('--ch-intensity', '0');
-
-      if (dragLevel >= 0.7) {
-        navigateTo(target);
-      } else {
-        // Return to current channel's fill level
-        fill.style.height = target === currentSection ? '92%' : '8%';
-      }
-      clearCrosstalk();
-    });
-
-    // Click = quick enter (bypass drag)
-    fader.addEventListener('click', (e) => {
-      if (isDraggingFader) return;
+    fader.addEventListener('click', () => {
       if (target !== currentSection) {
         navigateTo(target);
       }
@@ -2152,62 +2006,23 @@ function initFaderDrag() {
   });
 }
 
-// ── Channel crosstalk ──
-function updateCrosstalk(target, level) {
-  document.querySelectorAll('.section').forEach(s => {
-    const secId = s.id.replace('sec-', '');
-    if (secId === target || secId === currentSection) return;
-    s.classList.add('ghost');
-    if (level > 0.8) s.classList.add('ghost-strong');
-    else s.classList.remove('ghost-strong');
-  });
-}
-
-function clearCrosstalk() {
-  document.querySelectorAll('.section.ghost').forEach(s => {
-    s.classList.remove('ghost', 'ghost-strong');
-  });
-}
-
-// ── Cinematic transitions ──
-const TRANSITION_SEQUENCES = {
-  'source-cinema': ['beam'],
-  'cinema-groove': ['vinyl'],
-  'groove-cut': ['waveform'],
-  'cut-signal': ['radar'],
-};
-
 function navigateTo(target) {
   if (target === currentSection) return;
   soundEngine.playForBand(target);
 
-  const prev = currentSection;
   const app = document.getElementById('app');
   const glassCard = document.getElementById('glassInfoCard');
   const filmTL = document.getElementById('filmTimeline');
   const organicLayer = document.getElementById('organicLayer');
 
-  // Determine transition
-  const transitionKey = prev + '-' + target;
-  const isReturnToSource = target === 'source';
-  const hasSpecialTransition = TRANSITION_SEQUENCES[transitionKey];
-
-  // Hide all sections
-  document.querySelectorAll('.section').forEach(s => {
-    s.classList.remove('active', 'cinema-in', 'groove-in', 'cut-in', 'signal-in', 'ghost', 'ghost-strong');
-  });
-
-  // Show target section
+  // Hide all sections, show target
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   const targetEl = document.getElementById('sec-' + target);
-  if (target !== 'source') {
-    targetEl.classList.add(target + '-in');
-  }
   targetEl.classList.add('active');
 
   // Background
   if (target === 'source') {
     app.style.background = "url('3dphoto.png') center/cover no-repeat";
-    app.style.backgroundPosition = app.style.backgroundPosition || '50% 50%';
     if (glassCard) { glassCard.style.opacity = '1'; glassCard.style.pointerEvents = 'auto'; }
     if (filmTL) filmTL.style.opacity = '1';
     if (organicLayer) organicLayer.style.opacity = '0.5';
@@ -2218,66 +2033,13 @@ function navigateTo(target) {
     if (organicLayer) organicLayer.style.opacity = '0';
   }
 
-  // Cinematic transition animation
-  if (isReturnToSource) {
-    playFlashTransition();
-  } else if (hasSpecialTransition) {
-    playSpecialTransition(transitionKey);
-  }
-
   currentSection = target;
   updateFaderVisuals();
   window.scrollTo(0, 0);
-  showNarration(target);
-
-  // Clean up
-  setTimeout(() => {
-    targetEl.classList.remove(target + '-in');
-  }, 650);
 
   // Init page-specific features
   if (target === 'signal') initSignalRadar();
   if (target === 'cut') renderCutTimeline();
-}
-
-function playFlashTransition() {
-  const flash = document.getElementById('transFlash');
-  if (!flash) return;
-  flash.classList.add('active');
-  setTimeout(() => flash.classList.remove('active'), 500);
-}
-
-function playSpecialTransition(key) {
-  const overlay = document.getElementById('transitionOverlay');
-  if (!overlay) return;
-  overlay.classList.add('active');
-
-  const sequences = TRANSITION_SEQUENCES[key];
-  if (!sequences) { setTimeout(() => overlay.classList.remove('active'), 800); return; }
-
-  if (sequences.includes('beam')) {
-    const beam = document.getElementById('transBeam');
-    if (beam) { beam.style.display = 'block'; beam.style.animation = 'none'; beam.offsetHeight; beam.style.animation = 'beamSweep .9s ease-in-out'; }
-  }
-  if (sequences.includes('vinyl')) {
-    const vinyl = document.getElementById('transVinyl');
-    if (vinyl) { vinyl.style.display = 'block'; vinyl.style.animation = 'none'; vinyl.offsetHeight; vinyl.style.animation = 'vinylExpand .8s ease-in-out forwards'; }
-  }
-  if (sequences.includes('waveform')) {
-    const wf = document.getElementById('transWaveform');
-    if (wf) { wf.classList.add('active'); }
-  }
-  if (sequences.includes('radar')) {
-    const radar = document.getElementById('transRadar');
-    if (radar) { radar.style.display = 'block'; radar.style.animation = 'none'; radar.offsetHeight; radar.style.animation = 'radarPing .9s ease-out forwards'; }
-  }
-
-  setTimeout(() => {
-    overlay.classList.remove('active');
-    document.querySelectorAll('#transBeam, #transVinyl, #transRadar').forEach(el => el.style.display = 'none');
-    const wf = document.getElementById('transWaveform');
-    if (wf) wf.classList.remove('active');
-  }, 900);
 }
 
 // ═══════════ CINEMA ═══════════
