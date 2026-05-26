@@ -14,7 +14,7 @@
   --accent15:rgba(123,94,167,.15);--accent30:rgba(123,94,167,.3);--accent50:rgba(123,94,167,.5);
   --amber:#E8960C;--card:#0d0d0d;--surface:#0c0c0c;
   /* Channel colors */
-  --ch-source:#7b5ea7;--ch-cinema:#b87fe0;--ch-groove:#E8960C;--ch-cut:#7b5ea7;--ch-signal:#5ea7c8;
+  --ch-source:#7b5ea7;--ch-cinema:#0FA89E;--ch-groove:#E8960C;--ch-cut:#B8A88A;--ch-signal:#5ea7c8;
   /* Channel intensity (JS-driven) */
   --ch-intensity:0;--ch-crosstalk:0;
 }
@@ -51,7 +51,7 @@ a{color:var(--accent);text-decoration:none}
 .entry-choice-card:hover .entry-choice-icon{opacity:1}
 .entry-choice-label{font-size:13px;color:var(--text);letter-spacing:.1em;font-weight:600}
 .entry-choice-desc{font-size:10px;color:#707070;letter-spacing:.06em;line-height:1.6}
-.entry-choice-note{font-size:9px;color:#505050;letter-spacing:.08em;margin-top:36px;text-align:center}
+.entry-choice-note{font-size:10px;color:#505050;letter-spacing:.08em;margin-top:36px;text-align:center}
 
 /* Camera permission prompt */
 .entry-camera-prompt{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:11;background:rgba(6,6,6,.95)}
@@ -86,6 +86,20 @@ a{color:var(--accent);text-decoration:none}
 .entry-string-mid.plucked{background:#b87fe0;box-shadow:0 0 10px rgba(123,94,167,.7),0 0 24px rgba(123,94,167,.4);transition:background .04s,box-shadow .04s}
 .entry-string-mid.afterglow{background:rgba(123,94,167,.35);box-shadow:0 0 4px rgba(123,94,167,.2)}
 
+/* Bass strings: thicker, warm amber glow */
+.entry-string-wrap.string-bass .entry-string-fixed{width:2px;background:rgba(232,150,12,.25)}
+.entry-string-mid.bass-str{width:2px}
+.entry-string-mid.bass-str.active{background:#E8960C;box-shadow:0 0 8px rgba(232,150,12,.5),0 0 20px rgba(232,150,12,.2)}
+.entry-string-mid.bass-str.plucked{background:#f0a020;box-shadow:0 0 12px rgba(232,150,12,.7),0 0 28px rgba(232,150,12,.35)}
+.entry-string-mid.bass-str.afterglow{background:rgba(232,150,12,.4);box-shadow:0 0 6px rgba(232,150,12,.25)}
+
+/* Treble strings: thinner, bright cyan glow */
+.entry-string-wrap.string-treble .entry-string-fixed{width:0.5px;background:rgba(15,168,158,.25)}
+.entry-string-mid.treble-str{width:0.5px}
+.entry-string-mid.treble-str.active{background:#0FA89E;box-shadow:0 0 8px rgba(15,168,158,.5),0 0 20px rgba(15,168,158,.2)}
+.entry-string-mid.treble-str.plucked{background:#20d0c8;box-shadow:0 0 12px rgba(15,168,158,.7),0 0 28px rgba(15,168,158,.35)}
+.entry-string-mid.treble-str.afterglow{background:rgba(15,168,158,.4);box-shadow:0 0 6px rgba(15,168,158,.25)}
+
 /* Flash fragment layer */
 .entry-flash-layer{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
 .entry-flash-fragment{position:absolute;pointer-events:none;animation:flashFade .18s ease-out forwards;opacity:0}
@@ -99,7 +113,7 @@ a{color:var(--accent);text-decoration:none}
 
 /* Hint text */
 .entry-hint{position:absolute;bottom:8%;left:0;right:0;display:flex;justify-content:center;pointer-events:none;z-index:5;transition:opacity .5s}
-.entry-hint p{font-size:13px;color:rgba(255,255,255,.72);letter-spacing:.15em;animation:fadeIn 1s ease 1s both;display:flex;align-items:center;gap:6px}
+.entry-hint p{font-size:14px;color:rgba(255,255,255,.72);letter-spacing:.15em;animation:fadeIn 1s ease 1s both;display:flex;align-items:center;gap:6px}
 .entry-hint-cursor{width:1px;height:14px;background:rgba(255,255,255,.72);animation:blink 1.2s infinite}
 
 /* Signal strength indicator */
@@ -146,11 +160,11 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 @keyframes sectionIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
 /* ═══════════ GLASS INFO CARD — top-left ═══════════ */
-.glass-info-card{position:fixed;left:5%;top:18%;z-index:50;background:rgba(8,8,8,.28);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:22px 26px;display:flex;flex-direction:column;gap:8px;min-width:190px;animation:cardBreath 5s ease-in-out infinite;box-shadow:0 4px 32px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,.03) inset,0 8px 24px rgba(123,94,167,.06);transition:opacity .5s ease}
+.glass-info-card{position:fixed;left:5%;top:18%;z-index:50;background:rgba(8,8,8,.28);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:24px 28px;display:flex;flex-direction:column;gap:8px;min-width:200px;animation:cardBreath 5s ease-in-out infinite;box-shadow:0 4px 32px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,.03) inset,0 8px 24px rgba(123,94,167,.06);transition:opacity .5s ease}
 @keyframes cardBreath{0%,100%{box-shadow:0 4px 32px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,.03) inset,0 8px 24px rgba(123,94,167,.06)}50%{box-shadow:0 4px 40px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.05) inset,0 12px 32px rgba(123,94,167,.14)}}
-.glass-info-card .gic-name{font-size:19px;font-weight:700;color:#fff;letter-spacing:.05em;text-shadow:0 1px 8px rgba(0,0,0,.4)}
-.glass-info-card .gic-pinyin{font-size:9px;color:rgba(255,255,255,.35);letter-spacing:.25em;margin-top:-2px}
-.glass-info-card .gic-detail{font-size:10px;color:rgba(255,255,255,.42);letter-spacing:.1em;line-height:1.8}
+.glass-info-card .gic-name{font-size:20px;font-weight:700;color:#fff;letter-spacing:.05em;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.glass-info-card .gic-pinyin{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.25em;margin-top:-2px}
+.glass-info-card .gic-detail{font-size:11px;color:rgba(255,255,255,.42);letter-spacing:.1em;line-height:1.8}
 .glass-info-card .gic-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin-right:6px;animation:breathDot 5s ease-in-out infinite}
 @keyframes breathDot{0%,100%{opacity:.35}50%{opacity:1}}
 
@@ -165,12 +179,12 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 
 /* ═══════════ FILM TIMELINE — HUD bar above faders ═══════════ */
 .film-timeline{position:fixed;bottom:170px;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:center;gap:14px;padding:6px 0;pointer-events:none;font-family:ui-monospace,SFMono-Regular,monospace;transition:opacity .5s ease}
-.ft-timecode{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.08em}
+.ft-timecode{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.08em}
 .ft-sep{width:1px;height:10px;background:rgba(255,255,255,.1)}
-.ft-scene{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.12em}
-.ft-rec{font-size:10px;color:rgba(255,80,80,.6);letter-spacing:.1em;display:flex;align-items:center;gap:6px}
+.ft-scene{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.12em}
+.ft-rec{font-size:11px;color:rgba(255,80,80,.6);letter-spacing:.1em;display:flex;align-items:center;gap:6px}
 .ft-rec-dot{width:5px;height:5px;border-radius:50%;background:#f44;animation:blink 1.2s infinite;box-shadow:0 0 6px rgba(255,60,60,.5)}
-.ft-fps{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.06em}
+.ft-fps{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.06em}
 
 /* ═══════════ FADER NAVIGATION — 4 vertical glass faders ═══════════ */
 .fader-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;flex-direction:column;align-items:center;padding-bottom:28px;pointer-events:none}
@@ -195,14 +209,14 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 
 /* CINEMA: film sprocket holes */
 .fd-cinema{display:flex;gap:8px;align-items:center}
-.fd-cinema .fd-sprocket{width:6px;height:8px;border-radius:1px;border:1px solid rgba(196,160,184,.5);background:rgba(196,160,184,.08)}
+.fd-cinema .fd-sprocket{width:6px;height:8px;border-radius:1px;border:1px solid rgba(15,168,158,.5);background:rgba(15,168,158,.08)}
 
 /* GROOVE: audio waveform */
 .fd-groove svg{width:100%;height:28px}
 
 /* CUT: edit cut marks */
 .fd-cut{display:flex;gap:8px;align-items:center}
-.fd-cut .fd-cut-mark{width:1px;height:16px;background:rgba(123,94,167,.5)}
+.fd-cut .fd-cut-mark{width:1px;height:16px;background:rgba(184,168,138,.5)}
 .fd-cut .fd-cut-mark:nth-child(2n){height:10px}
 
 /* SIGNAL: radio signal dots */
@@ -232,12 +246,37 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .fader-pos.active .fp-fill{height:92%;background:linear-gradient(to top,rgba(123,94,167,.5),rgba(180,140,210,.25));box-shadow:0 0 10px rgba(123,94,167,.3)}
 
 /* Fader labels */
-.fp-label{font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.12em;font-family:ui-monospace,SFMono-Regular,monospace;transition:color .4s;white-space:nowrap}
+.fp-label{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.12em;font-family:ui-monospace,SFMono-Regular,monospace;transition:color .4s;white-space:nowrap}
 .fader-pos:hover .fp-label{color:rgba(255,255,255,.45)}
 .fader-pos.active .fp-label{color:rgba(200,170,230,.85)}
-.fp-sub{font-size:10px;color:rgba(255,255,255,.15);letter-spacing:.08em;transition:color .4s}
+.fp-sub{font-size:11px;color:rgba(255,255,255,.15);letter-spacing:.08em;transition:color .4s}
 .fader-pos:hover .fp-sub{color:rgba(255,255,255,.3)}
 .fader-pos.active .fp-sub{color:rgba(180,140,210,.5)}
+
+/* Per-section fader active colors */
+/* CINEMA — Teal */
+.fader-pos[data-target="cinema"].active{background:rgba(15,168,158,.06);box-shadow:0 8px 32px rgba(15,168,158,.08),0 0 0 1px rgba(15,168,158,.1) inset,0 1px 0 rgba(255,255,255,.02) inset}
+.fader-pos[data-target="cinema"].active:hover{box-shadow:0 12px 40px rgba(15,168,158,.14),0 0 0 1px rgba(15,168,158,.18) inset,0 1px 0 rgba(255,255,255,.03) inset}
+.fader-pos[data-target="cinema"].active .fp-cap{background:rgba(60,200,190,.6);box-shadow:0 0 16px rgba(15,168,158,.35),0 0 4px rgba(60,200,190,.4)}
+.fader-pos[data-target="cinema"].active .fp-fill{height:92%;background:linear-gradient(to top,rgba(15,168,158,.45),rgba(60,200,190,.2));box-shadow:0 0 10px rgba(15,168,158,.25)}
+.fader-pos[data-target="cinema"].active .fp-label{color:rgba(120,220,210,.8)}
+.fader-pos[data-target="cinema"].active .fp-sub{color:rgba(80,190,180,.45)}
+
+/* GROOVE — Amber */
+.fader-pos[data-target="groove"].active{background:rgba(232,150,12,.06);box-shadow:0 8px 32px rgba(232,150,12,.08),0 0 0 1px rgba(232,150,12,.1) inset,0 1px 0 rgba(255,255,255,.02) inset}
+.fader-pos[data-target="groove"].active:hover{box-shadow:0 12px 40px rgba(232,150,12,.14),0 0 0 1px rgba(232,150,12,.18) inset,0 1px 0 rgba(255,255,255,.03) inset}
+.fader-pos[data-target="groove"].active .fp-cap{background:rgba(240,170,40,.7);box-shadow:0 0 16px rgba(232,150,12,.4),0 0 4px rgba(240,170,40,.5)}
+.fader-pos[data-target="groove"].active .fp-fill{height:92%;background:linear-gradient(to top,rgba(232,150,12,.5),rgba(240,170,40,.25));box-shadow:0 0 10px rgba(232,150,12,.3)}
+.fader-pos[data-target="groove"].active .fp-label{color:rgba(245,180,60,.85)}
+.fader-pos[data-target="groove"].active .fp-sub{color:rgba(220,160,40,.5)}
+
+/* CUT — Khaki */
+.fader-pos[data-target="cut"].active{background:rgba(184,168,138,.06);box-shadow:0 8px 32px rgba(184,168,138,.08),0 0 0 1px rgba(184,168,138,.1) inset,0 1px 0 rgba(255,255,255,.02) inset}
+.fader-pos[data-target="cut"].active:hover{box-shadow:0 12px 40px rgba(184,168,138,.14),0 0 0 1px rgba(184,168,138,.18) inset,0 1px 0 rgba(255,255,255,.03) inset}
+.fader-pos[data-target="cut"].active .fp-cap{background:rgba(200,185,155,.7);box-shadow:0 0 16px rgba(184,168,138,.4),0 0 4px rgba(200,185,155,.5)}
+.fader-pos[data-target="cut"].active .fp-fill{height:92%;background:linear-gradient(to top,rgba(184,168,138,.5),rgba(200,185,155,.25));box-shadow:0 0 10px rgba(184,168,138,.3)}
+.fader-pos[data-target="cut"].active .fp-label{color:rgba(205,190,165,.85)}
+.fader-pos[data-target="cut"].active .fp-sub{color:rgba(190,175,150,.5)}
 
 /* ═══════════ PAGE TRANSITIONS ═══════════ */
 /* Console active state (source section is transparent overlay) */
@@ -246,52 +285,54 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 /* ═══════════ CINEMA — Cinematic Case Study ═══════════ */
 .cinema-archive{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid #1a1a1a}
 .cinema-archive-left{display:flex;flex-direction:column;gap:2px}
-.cinema-archive-label{font-size:10px;color:var(--dim);letter-spacing:.2em}
-.cinema-archive-code{font-size:9px;color:#505050;letter-spacing:.12em;margin-top:2px}
-.cinema-archive-status{font-size:10px;color:rgba(255,80,80,.45);letter-spacing:.1em;display:flex;align-items:center;gap:5px}
+.cinema-archive-label{font-size:11px;color:var(--dim);letter-spacing:.2em}
+.cinema-archive-code{font-size:10px;color:#505050;letter-spacing:.12em;margin-top:2px}
+.cinema-archive-status{font-size:11px;color:rgba(255,80,80,.45);letter-spacing:.1em;display:flex;align-items:center;gap:5px}
 .cinema-archive-dot{width:5px;height:5px;border-radius:50%;background:#f44;box-shadow:0 0 6px rgba(255,60,60,.4);animation:blink 1.5s infinite}
 
 .cinema-title-block{margin-bottom:28px}
-.cinema-title-main{font-size:21px;font-weight:700;color:#e0e0e0;letter-spacing:.04em;display:block;line-height:1.4}
-.cinema-title-sub{font-size:9px;color:#707070;letter-spacing:.18em;margin-top:6px;display:block}
+.cinema-title-main{font-size:22px;font-weight:700;color:#e0e0e0;letter-spacing:.04em;display:block;line-height:1.4}
+.cinema-title-sub{font-size:10px;color:#707070;letter-spacing:.18em;margin-top:6px;display:block}
 
 .cinema-layout{display:grid;grid-template-columns:150px 1fr 370px;gap:28px;min-height:480px;margin-bottom:32px}
 
 /* Left: Film strip chapter cards */
 .cinema-chapters{display:flex;flex-direction:column;gap:5px}
-.cinema-chapter-card{position:relative;background:rgba(255,255,255,.012);border:1px solid #181818;border-radius:3px;padding:12px 10px 12px 16px;cursor:pointer;transition:border-color .35s,background .35s,box-shadow .35s;overflow:hidden}
+.cinema-chapter-card{position:relative;background:rgba(255,255,255,.012);border:1px solid #181818;border-radius:3px;padding:14px 10px 14px 18px;cursor:pointer;transition:border-color .35s,background .35s,box-shadow .35s;overflow:hidden}
 .cinema-chapter-card::before{content:'';position:absolute;left:3px;top:8px;bottom:8px;width:3px;border-radius:1px;background:repeating-linear-gradient(transparent,transparent 4px,rgba(255,255,255,.04) 4px,rgba(255,255,255,.04) 6px)}
 .cinema-chapter-card::after{content:'';position:absolute;right:3px;top:8px;bottom:8px;width:3px;border-radius:1px;background:repeating-linear-gradient(transparent,transparent 4px,rgba(255,255,255,.04) 4px,rgba(255,255,255,.04) 6px)}
 .cinema-chapter-card:hover{background:rgba(255,255,255,.025);border-color:#252525}
-.cinema-chapter-card.active{background:rgba(123,94,167,.05);border-color:rgba(123,94,167,.25);box-shadow:0 0 18px rgba(123,94,167,.05)}
-.cinema-chapter-num{font-size:17px;font-weight:700;color:rgba(255,255,255,.1);letter-spacing:.04em;display:block;margin-bottom:3px;transition:color .35s}
-.cinema-chapter-card.active .cinema-chapter-num{color:rgba(123,94,167,.35)}
-.cinema-chapter-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.06em;line-height:1.4;white-space:pre-line;transition:color .35s}
-.cinema-chapter-card.active .cinema-chapter-label{color:rgba(200,170,230,.65)}
+.cinema-chapter-card.active{background:rgba(15,168,158,.05);border-color:rgba(15,168,158,.25);box-shadow:0 0 18px rgba(15,168,158,.05)}
+.cinema-chapter-num{font-size:18px;font-weight:700;color:rgba(255,255,255,.1);letter-spacing:.04em;display:block;margin-bottom:4px;transition:color .35s}
+.cinema-chapter-card.active .cinema-chapter-num{color:rgba(15,168,158,.35)}
+.cinema-chapter-label{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.06em;line-height:1.4;white-space:pre-line;transition:color .35s}
+.cinema-chapter-card.active .cinema-chapter-label{color:rgba(140,220,215,.65)}
 .cinema-chapter-dot{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.08);transition:background .35s,box-shadow .35s}
-.cinema-chapter-card.active .cinema-chapter-dot{background:var(--accent);box-shadow:0 0 5px var(--accent30)}
+.cinema-chapter-card.active .cinema-chapter-dot{background:#0FA89E;box-shadow:0 0 5px rgba(15,168,158,.3)}
 
 /* Center: Lens path + params + description */
 .cinema-center{display:flex;flex-direction:column;gap:20px}
 .cinema-lens-path{width:100%;height:72px;position:relative}
 .cinema-lens-path svg{width:100%;height:100%}
-.cinema-lens-label{font-size:7px;fill:rgba(255,255,255,.2);letter-spacing:.06em;text-anchor:middle}
+.cinema-lens-label{font-size:8px;fill:rgba(255,255,255,.2);letter-spacing:.06em;text-anchor:middle}
 .cinema-lens-line{fill:none;stroke:rgba(255,255,255,.06);stroke-width:.8;stroke-dasharray:3 4}
 .cinema-lens-dot{fill:rgba(255,255,255,.08)}
 
 .cinema-params{background:rgba(255,255,255,.01);border:1px solid #181818;border-radius:6px;padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
 .cinema-param-item{display:flex;flex-direction:column;gap:2px}
-.cinema-param-label{font-size:8px;color:#585858;letter-spacing:.15em}
-.cinema-param-value{font-size:11px;color:#a8a8a8;letter-spacing:.03em;line-height:1.5}
-.cinema-param-value.accent{color:var(--accent)}
+.cinema-param-label{font-size:9px;color:#585858;letter-spacing:.15em}
+.cinema-param-value{font-size:12px;color:#a8a8a8;letter-spacing:.03em;line-height:1.5}
+.cinema-param-value.accent{color:#0FA89E}
 
-.cinema-desc-block{border-left:2px solid rgba(123,94,167,.15);padding-left:14px}
-.cinema-desc-label{font-size:9px;color:var(--accent);letter-spacing:.15em;margin-bottom:8px;display:block}
-.cinema-desc-text{font-size:11px;color:#888;line-height:1.9;letter-spacing:.03em}
+.cinema-desc-block{border-left:2px solid rgba(15,168,158,.15);padding-left:14px}
+.cinema-desc-label{font-size:10px;color:#0FA89E;letter-spacing:.15em;margin-bottom:8px;display:block}
+.cinema-desc-text{font-size:12px;color:#888;line-height:1.9;letter-spacing:.03em}
 .cinema-desc-text strong{color:#b0b0b0;font-weight:600}
 
 /* Chapter detail overlay in center */
-.cinema-chapter-detail{font-size:11px;color:#808080;line-height:1.8;letter-spacing:.03em;padding:14px 16px;background:rgba(255,255,255,.01);border:1px solid #181818;border-radius:6px;min-height:80px;transition:all .4s ease}
+.cinema-chapter-detail{font-size:13px;color:#808080;line-height:1.8;letter-spacing:.03em;padding:16px 18px;background:rgba(255,255,255,.01);border:1px solid #181818;border-radius:6px;min-height:80px;transition:all .4s ease}
+.cinema-chapter-detail.highlight{animation:chapterFlash .6s ease}
+@keyframes chapterFlash{0%{border-color:rgba(15,168,158,.55);box-shadow:0 0 28px rgba(15,168,158,.18),0 0 0 1px rgba(15,168,158,.1) inset;background:rgba(15,168,158,.05)}100%{border-color:#181818;box-shadow:none;background:rgba(255,255,255,.01)}}
 
 /* Right: Film monitor preview */
 .cinema-monitor{display:flex;flex-direction:column;gap:8px}
@@ -301,18 +342,18 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .cinema-monitor-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
 .cinema-monitor-corners{position:absolute;inset:6px;border:1px solid rgba(255,255,255,.03);pointer-events:none;z-index:2;clip-path:polygon(0 0,20px 0,20px 1px,1px 1px,1px 20px,0 20px,0 calc(100% - 20px),1px calc(100% - 20px),1px calc(100% - 1px),20px calc(100% - 1px),20px 100%,0 100%,calc(100% - 20px) 100%,calc(100% - 20px) calc(100% - 1px),calc(100% - 1px) calc(100% - 1px),calc(100% - 1px) calc(100% - 20px),100% calc(100% - 20px),100% 0,calc(100% - 1px) 0,calc(100% - 1px) 20px,calc(100% - 20px) 20px,calc(100% - 20px) 0)}
 .cinema-monitor-hud{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;z-index:3;pointer-events:none}
-.cinema-monitor-rec{font-size:8px;color:rgba(255,60,60,.5);letter-spacing:.1em;display:flex;align-items:center;gap:4px}
+.cinema-monitor-rec{font-size:9px;color:rgba(255,60,60,.5);letter-spacing:.1em;display:flex;align-items:center;gap:4px}
 .cinema-monitor-rec-dot{width:4px;height:4px;border-radius:50%;background:#f44;box-shadow:0 0 4px rgba(255,60,60,.35);animation:blink 1.5s infinite}
-.cinema-monitor-meta{font-size:8px;color:rgba(255,255,255,.2);letter-spacing:.08em;display:flex;gap:8px}
-.cinema-monitor-tc{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;font-size:9px;color:rgba(255,255,255,.15);letter-spacing:.12em;font-family:ui-monospace,SFMono-Regular,monospace}
-.cinema-monitor-label{font-size:8px;color:#484848;letter-spacing:.1em;text-align:center;margin-top:2px}
+.cinema-monitor-meta{font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.08em;display:flex;gap:8px}
+.cinema-monitor-tc{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:.12em;font-family:ui-monospace,SFMono-Regular,monospace}
+.cinema-monitor-label{font-size:9px;color:#484848;letter-spacing:.1em;text-align:center;margin-top:2px}
 
 /* ═══════════ GROOVE — EP Record ═══════════ */
 .ep-layout{display:flex;flex-direction:column;gap:28px}
 .ep-header{display:flex;flex-direction:column;gap:4px;margin-bottom:4px}
-.ep-label{font-size:18px;color:var(--amber);font-weight:700;letter-spacing:.08em}
-.ep-sub{font-size:9px;color:#707070;letter-spacing:.12em}
-.ep-main{display:grid;grid-template-columns:320px 1fr;gap:40px;min-height:500px;align-items:start}
+.ep-label{font-size:19px;color:var(--amber);font-weight:700;letter-spacing:.08em}
+.ep-sub{font-size:10px;color:#707070;letter-spacing:.12em}
+.ep-main{display:grid;grid-template-columns:400px 1fr;gap:40px;min-height:500px;align-items:start}
 .ep-left{position:sticky;top:20px;display:flex;flex-direction:column;gap:16px}
 .ep-vinyl{display:flex;flex-direction:column;align-items:center;padding:20px;background:rgba(255,255,255,.01);border:1px solid #181818;border-radius:10px;position:relative}
 .ep-vinyl-svg{transition:transform .6s cubic-bezier(.25,.8,.25,1)}
@@ -322,65 +363,68 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .ep-now-playing{display:none;flex-direction:column;align-items:center;gap:4px;margin-top:8px}
 .ep-now-playing.show{display:flex}
 .ep-np-dot{width:5px;height:5px;border-radius:50%;background:var(--amber);animation:blink 1.2s infinite}
-.ep-np-label{font-size:9px;color:var(--dim);letter-spacing:.1em}
-.ep-np-title{font-size:12px;color:var(--amber);font-weight:600;letter-spacing:.04em}
+.ep-np-label{font-size:10px;color:var(--dim);letter-spacing:.1em}
+.ep-np-title{font-size:13px;color:var(--amber);font-weight:600;letter-spacing:.04em}
 .ep-tracklist{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.01);border:1px solid #181818;border-radius:8px;overflow:hidden}
-.ep-track-item{display:flex;align-items:center;gap:14px;width:100%;padding:14px 18px;border:none;background:transparent;cursor:pointer;text-align:left;font-family:inherit;border-bottom:1px solid #111;transition:all .3s;color:var(--text);position:relative}
+.ep-track-item{display:flex;align-items:center;gap:14px;width:100%;padding:16px 18px;border:none;background:transparent;cursor:pointer;text-align:left;font-family:inherit;border-bottom:1px solid #111;transition:all .3s;color:var(--text);position:relative;flex-wrap:wrap}
 .ep-track-item:last-child{border-bottom:none}
 .ep-track-item:hover{background:#111}
 .ep-track-item.active{background:rgba(232,150,12,.06);border-left:3px solid var(--amber);padding-left:15px}
-.ep-track-num{font-size:14px;color:#505050;font-weight:700;width:28px;flex-shrink:0;transition:color .3s;font-family:ui-monospace,SFMono-Regular,monospace}
+.ep-track-num{font-size:16px;color:#505050;font-weight:700;width:28px;flex-shrink:0;transition:color .3s;font-family:ui-monospace,SFMono-Regular,monospace}
 .ep-track-item:hover .ep-track-num,.ep-track-item.active .ep-track-num{color:var(--amber)}
-.ep-track-info{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
-.ep-track-title{font-size:12px;color:var(--text);font-weight:600;transition:color .3s}
+.ep-track-info{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0;overflow:hidden}
+.ep-track-title{font-size:13px;color:var(--text);font-weight:600;transition:color .3s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ep-track-item.active .ep-track-title{color:var(--amber)}
-.ep-track-desc{font-size:9px;color:var(--dim);letter-spacing:.04em}
-.ep-track-tags{display:none;gap:4px;flex-wrap:wrap;position:absolute;right:14px;top:50%;transform:translateY(-50%)}
-.ep-track-item:hover .ep-track-tags{display:flex}
+.ep-track-desc{font-size:10px;color:var(--dim);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ep-track-tags{display:none;gap:4px;flex-wrap:wrap;margin-top:2px;flex-basis:100%;margin-left:42px}
+.ep-track-item.active .ep-track-tags,.ep-track-item:hover .ep-track-tags{display:flex}
 .ep-track-tag{font-size:9px;color:rgba(232,150,12,.6);background:rgba(232,150,12,.05);border:1px solid rgba(232,150,12,.15);padding:2px 8px;border-radius:3px;letter-spacing:.04em}
 .ep-right{min-height:500px}
 .ep-journal{animation:fadeIn .4s ease}
+.ep-journal-images{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.ep-journal-img{height:120px;border-radius:4px;border:1px solid #1c1c1c;object-fit:cover;filter:grayscale(.3) contrast(1.05) brightness(.85);transition:all .3s;cursor:pointer}
+.ep-journal-img:hover{filter:grayscale(0) contrast(1.1) brightness(.95);border-color:rgba(232,150,12,.3);transform:scale(1.03)}
 .ep-journal-empty{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0a0a0a;border:1px solid #181818;border-radius:8px}
-.ep-je-icon{font-size:36px;opacity:.15;color:var(--text)}
-.ep-journal-empty p{font-size:13px;color:var(--dim);line-height:1.6;text-align:center}
-.ep-je-hint{font-size:10px;color:#606060;letter-spacing:.1em}
+.ep-je-icon{font-size:38px;opacity:.15;color:var(--text)}
+.ep-journal-empty p{font-size:14px;color:var(--dim);line-height:1.6;text-align:center}
+.ep-je-hint{font-size:11px;color:#606060;letter-spacing:.1em}
 .ep-journal-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid #181818}
-.ep-journal-role{font-size:12px;color:var(--amber);letter-spacing:.06em;font-weight:600}
-.ep-journal-phase{font-size:10px;color:#707070}
+.ep-journal-role{font-size:13px;color:var(--amber);letter-spacing:.06em;font-weight:600}
+.ep-journal-phase{font-size:11px;color:#707070}
 .ep-lyrics{display:flex;flex-direction:column;gap:18px;margin-bottom:24px}
 .ep-lyric-block{padding:16px 18px;border-radius:6px;background:rgba(255,255,255,.01);border:1px solid #181818;transition:all .3s}
 .ep-lyric-block.chorus{background:rgba(232,150,12,.03);border-color:rgba(232,150,12,.12)}
-.ep-lyric-label{display:block;font-size:8px;color:var(--dim);letter-spacing:.12em;margin-bottom:8px}
+.ep-lyric-label{display:block;font-size:9px;color:var(--dim);letter-spacing:.12em;margin-bottom:8px}
 .ep-lyric-block.chorus .ep-lyric-label{color:var(--amber)}
-.ep-lyric-text{font-size:12px;color:#909090;line-height:1.8;margin:0}
+.ep-lyric-text{font-size:13px;color:#909090;line-height:1.8;margin:0}
 .ep-lyric-block.chorus .ep-lyric-text{color:#bbb}
 .ep-journal-skills{background:rgba(255,255,255,.01);border:1px solid #181818;border-radius:8px;padding:16px 18px;margin-top:20px}
-.ep-skills-label{display:block;font-size:8px;color:#808080;letter-spacing:.12em;margin-bottom:10px}
+.ep-skills-label{display:block;font-size:9px;color:#808080;letter-spacing:.12em;margin-bottom:10px}
 .ep-skills-tags{display:flex;gap:6px;flex-wrap:wrap}
-.ep-skill-tag{font-size:10px;color:#909090;background:#111;border:1px solid #1c1c1c;padding:4px 12px;border-radius:3px;transition:all .25s}
+.ep-skill-tag{font-size:11px;color:#909090;background:#111;border:1px solid #1c1c1c;padding:4px 12px;border-radius:3px;transition:all .25s}
 .ep-skill-tag:hover{border-color:var(--amber);color:var(--amber);background:rgba(232,150,12,.05)}
 
 /* ═══════════ CUT — AI Editing Suite ═══════════ */
 .cut-station{display:flex;flex-direction:column;gap:24px}
 .cut-header-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:12px}
-.cut-station-label{font-size:10px;color:#b0b0b0;letter-spacing:.2em}
+.cut-station-label{font-size:11px;color:#b0b0b0;letter-spacing:.2em}
 .cut-scenario-tabs{display:flex;gap:4px;flex-wrap:wrap}
-.cut-scenario-tab{background:transparent;border:1px solid #2a2a2a;color:#b0b0b0;padding:6px 16px;border-radius:4px;font-family:inherit;font-size:11px;cursor:pointer;letter-spacing:.04em;transition:all .25s}
+.cut-scenario-tab{background:transparent;border:1px solid #2a2a2a;color:#b0b0b0;padding:7px 18px;border-radius:4px;font-family:inherit;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:all .25s}
 .cut-scenario-tab:hover{border-color:#a8a8a8;color:#909090}
-.cut-scenario-tab.active{border-color:var(--accent);color:var(--accent);background:rgba(123,94,167,.1)}
+.cut-scenario-tab.active{border-color:#B8A88A;color:#B8A88A;background:rgba(184,168,138,.1)}
 .cut-timeline{display:flex;flex-direction:column;gap:2px;background:rgba(255,255,255,.01);border:1px solid #1a1a1a;border-radius:6px;padding:8px;overflow:hidden}
-.cut-track{display:flex;align-items:center;gap:12px;height:36px;padding:0 8px;border-radius:3px;transition:background .25s}
+.cut-track{display:flex;align-items:center;gap:12px;height:38px;padding:0 8px;border-radius:3px;transition:background .25s}
 .cut-track:hover{background:rgba(255,255,255,.015)}
-.cut-track-label{font-size:9px;color:#505050;letter-spacing:.1em;width:90px;flex-shrink:0;font-family:ui-monospace,SFMono-Regular,monospace}
-.cut-track-lane{flex:1;height:22px;border-radius:2px;position:relative;overflow:hidden}
-.cut-track[data-track="video"] .cut-track-lane{background:rgba(123,94,167,.06);border:1px solid rgba(123,94,167,.1)}
+.cut-track-label{font-size:10px;color:#505050;letter-spacing:.1em;width:100px;flex-shrink:0;font-family:ui-monospace,SFMono-Regular,monospace}
+.cut-track-lane{flex:1;height:24px;border-radius:2px;position:relative;overflow:hidden}
+.cut-track[data-track="video"] .cut-track-lane{background:rgba(184,168,138,.06);border:1px solid rgba(184,168,138,.1)}
 .cut-track[data-track="audio"] .cut-track-lane{background:rgba(232,150,12,.04);border:1px solid rgba(232,150,12,.1)}
 .cut-track[data-track="text"] .cut-track-lane{background:rgba(94,167,200,.04);border:1px solid rgba(94,167,200,.1)}
 .cut-track[data-track="semantic"] .cut-track-lane{background:rgba(160,140,180,.04);border:1px solid rgba(160,140,180,.1)}
 .cut-track[data-track="human"] .cut-track-lane{background:rgba(180,140,140,.04);border:1px solid rgba(180,140,140,.1)}
 .cut-clip{position:absolute;top:2px;bottom:2px;border-radius:2px;opacity:.5;transition:opacity .3s}
 .cut-clip:hover{opacity:.85}
-.cut-clip.video{background:rgba(123,94,167,.4)}
+.cut-clip.video{background:rgba(184,168,138,.4)}
 .cut-clip.audio{background:rgba(232,150,12,.4)}
 .cut-clip.text{background:rgba(94,167,200,.4)}
 .cut-clip.semantic{background:rgba(160,140,180,.4)}
@@ -388,29 +432,127 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .cut-pipeline{margin-top:8px}
 .cut-stage-card{background:var(--surface);border:1px solid #1a1a1a;border-radius:8px;overflow:hidden;transition:border-color .3s,box-shadow .3s;margin-bottom:2px}
 .cut-stage-card:hover{border-color:#888}
-.cut-stage-head{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid #1a1a1a;background:rgba(255,255,255,.008);cursor:pointer;user-select:none;transition:background .2s;flex-wrap:wrap}
+.cut-stage-head{display:flex;align-items:center;gap:14px;padding:18px 22px;border-bottom:1px solid #1a1a1a;background:rgba(255,255,255,.008);cursor:pointer;user-select:none;transition:background .2s;flex-wrap:wrap}
 .cut-stage-head:hover{background:rgba(255,255,255,.015)}
-.cut-stage-icon{font-size:20px;color:var(--accent);width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--accent15);flex-shrink:0;transition:background .25s,transform .2s}
-.cut-stage-head:hover .cut-stage-icon{background:rgba(123,94,167,.16);transform:scale(1.05)}
+.cut-stage-icon{font-size:22px;color:#B8A88A;width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(184,168,138,.15);flex-shrink:0;transition:background .25s,transform .2s}
+.cut-stage-head:hover .cut-stage-icon{background:rgba(184,168,138,.16);transform:scale(1.05)}
 .cut-stage-head-text{display:flex;flex-direction:column;gap:1px;flex:1;min-width:0}
-.cut-stage-name{font-size:14px;color:#d0d0d0;font-weight:600;letter-spacing:.05em}
-.cut-stage-en{font-size:10px;color:#a8a8a8;letter-spacing:.04em}
-.cut-stage-meta{display:flex;gap:16px;flex-shrink:0;font-size:10px;color:#b0b0b0;letter-spacing:.03em;flex-wrap:wrap}
-.cut-stage-meta b{color:var(--accent);font-weight:600}
-.cut-stage-toggle{font-size:12px;color:var(--dim);transition:transform .3s,color .3s;flex-shrink:0}
+.cut-stage-name{font-size:15px;color:#d0d0d0;font-weight:600;letter-spacing:.05em}
+.cut-stage-en{font-size:11px;color:#a8a8a8;letter-spacing:.04em}
+.cut-stage-meta{display:flex;gap:16px;flex-shrink:0;font-size:11px;color:#b0b0b0;letter-spacing:.03em;flex-wrap:wrap}
+.cut-stage-meta b{color:#B8A88A;font-weight:600}
+.cut-stage-toggle{font-size:13px;color:var(--dim);transition:transform .3s,color .3s;flex-shrink:0}
 .cut-stage-head:hover .cut-stage-toggle{color:#b0b0b0}
 .cut-stage-card.open .cut-stage-toggle{transform:rotate(180deg)}
 .cut-stage-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
-.cut-stage-card.open .cut-stage-body{max-height:600px;padding:18px 20px}
-.cut-cog-label{display:block;font-size:9px;color:#a0a0a0;letter-spacing:.1em;margin-bottom:8px}
-.cut-cog-text{font-size:12.5px;color:#909090;line-height:1.7;margin:0;padding-left:12px;border-left:2px solid var(--accent30)}
+.cut-stage-card.open .cut-stage-body{max-height:600px;padding:20px 22px}
+.cut-cog-label{display:block;font-size:10px;color:#a0a0a0;letter-spacing:.1em;margin-bottom:8px}
+.cut-cog-text{font-size:13px;color:#909090;line-height:1.7;margin:0;padding-left:12px;border-left:2px solid rgba(184,168,138,.3)}
 .cut-cog-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.cut-cog-tag{font-size:11px;color:var(--accent);background:rgba(123,94,167,.07);border:1px solid rgba(123,94,167,.18);padding:5px 14px;border-radius:3px;letter-spacing:.03em;cursor:pointer;transition:all .2s}
-.cut-cog-tag:hover{border-color:var(--accent50);background:rgba(123,94,167,.15);transform:translateY(-1px)}
+.cut-cog-tag{font-size:12px;color:#B8A88A;background:rgba(184,168,138,.07);border:1px solid rgba(184,168,138,.18);padding:5px 14px;border-radius:3px;letter-spacing:.03em;cursor:pointer;transition:all .2s}
+.cut-cog-tag:hover{border-color:rgba(184,168,138,.5);background:rgba(184,168,138,.15);transform:translateY(-1px)}
 .cut-insight-footer{margin-top:24px;padding:20px 24px;background:var(--card);border:1px solid var(--border);border-radius:8px}
-.cut-insight-label{display:block;font-size:10px;color:var(--dim);letter-spacing:.12em;margin-bottom:12px}
-.cut-insight-text{font-size:12.5px;color:var(--accent);line-height:1.75;padding-left:14px;border-left:2px solid var(--accent30);margin:0}
+.cut-insight-label{display:block;font-size:11px;color:var(--dim);letter-spacing:.12em;margin-bottom:12px}
+.cut-insight-text{font-size:13px;color:#B8A88A;line-height:1.75;padding-left:14px;border-left:2px solid rgba(184,168,138,.3);margin:0}
 .cut-signal-flow{display:flex;justify-content:center;padding:2px 0}
+
+/* ═══════════ CUT — Distribution Feedback & Platform Matrix ═══════════ */
+.cut-distribution-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px}
+
+/* Distribution Feedback — Signal Meter Panel */
+.dist-feedback{position:relative;background:rgba(255,255,255,.012);border:1px solid #1a1a1a;border-radius:10px;padding:24px 24px 20px;overflow:hidden}
+.dist-feedback::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(184,168,138,.04) 0%,transparent 70%);z-index:0}
+.dist-feedback::after{content:'';position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");z-index:0}
+.dist-feedback-header{display:flex;flex-direction:column;gap:2px;margin-bottom:24px;position:relative;z-index:1;padding-bottom:14px;border-bottom:1px solid rgba(184,168,138,.08)}
+.dist-feedback-header span:first-child{font-size:10px;color:#707070;letter-spacing:.18em;font-family:ui-monospace,SFMono-Regular,monospace}
+.dist-feedback-header span:last-child{font-size:12px;color:#B8A88A;letter-spacing:.08em}
+.dist-meters{display:flex;justify-content:center;gap:24px;position:relative;z-index:1}
+.dist-meter{flex:1;max-width:180px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;cursor:pointer;padding:18px 8px;border-radius:8px;transition:background .3s,border-color .3s,transform .3s;border:1px solid transparent}
+.dist-meter:hover{background:rgba(184,168,138,.06);border-color:rgba(184,168,138,.18);transform:translateY(-2px)}
+.dist-meter-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90px;height:90px;pointer-events:none;opacity:.45;transition:opacity .3s}
+.dist-meter:hover .dist-meter-ring{opacity:.9}
+.dist-ring-fill{transition:stroke-dasharray 1.2s cubic-bezier(.25,.8,.25,1)}
+.dist-meter-value{font-size:36px;font-weight:700;color:#e0e0e0;letter-spacing:.02em;font-family:ui-monospace,SFMono-Regular,monospace;position:relative;z-index:1;transition:color .3s,text-shadow .3s;text-shadow:0 0 30px rgba(184,168,138,.15)}
+.dist-meter:hover .dist-meter-value{color:#fff;text-shadow:0 0 24px rgba(184,168,138,.5),0 0 60px rgba(184,168,138,.15)}
+.dist-meter-wave{display:flex;align-items:flex-end;gap:4px;height:28px;position:relative;z-index:1}
+.dist-meter-wave .wf-bar{width:3px;border-radius:1px;background:rgba(184,168,138,.4);transition:height .4s ease,background .3s}
+.dist-meter:hover .dist-meter-wave .wf-bar{background:rgba(200,185,155,.7)}
+.dist-meter-label{font-size:10px;color:#606060;letter-spacing:.06em;text-align:center;line-height:1.4;position:relative;z-index:1;transition:color .3s}
+.dist-meter:hover .dist-meter-label{color:#909090}
+.dist-signal-canvas{position:absolute;bottom:0;left:0;right:0;height:50px;pointer-events:none;z-index:0;opacity:.35}
+
+/* Data dot burst on meter hover */
+.dist-dot-burst{position:fixed;pointer-events:none;z-index:2}
+.dist-dot-particle{position:absolute;width:2px;height:2px;border-radius:50%;background:#B8A88A;animation:dotBurst .6s ease-out forwards}
+@keyframes dotBurst{0%{transform:translate(0,0) scale(1);opacity:.8}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+
+/* Platform Matrix — compact signal distribution network */
+.platform-matrix{position:relative;background:rgba(255,255,255,.008);border:1px solid #1a1a1a;border-radius:10px;padding:20px 16px 16px;overflow:visible}
+.platform-matrix-header{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.platform-matrix-header span:first-child{font-size:10px;color:#707070;letter-spacing:.18em;font-family:ui-monospace,SFMono-Regular,monospace}
+.platform-matrix-header span:last-child{font-size:12px;color:#B8A88A;letter-spacing:.08em}
+.platform-graph{position:relative;height:195px;margin-top:0}
+.platform-connectors{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.platform-connectors line{stroke:#1c1c1c;stroke-width:1;transition:stroke .4s}
+.platform-connectors line.active{stroke:rgba(184,168,138,.3);stroke-width:1.5}
+@keyframes dotTravel{0%{offset-distance:0%;opacity:.6}50%{opacity:.9}100%{offset-distance:100%;opacity:.3}}
+
+/* Center node */
+.platform-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;border:1px solid rgba(184,168,138,.3);background:rgba(184,168,138,.08);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#B8A88A;letter-spacing:.08em;text-align:center;line-height:1.4;z-index:2;animation:nodePulse 3s ease-in-out infinite;cursor:default;transition:border-color .3s,box-shadow .3s}
+.platform-center::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(184,168,138,.08);animation:nodePulseRing 3s ease-in-out infinite}
+.platform-center::after{content:'';position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(184,168,138,.04);animation:nodePulseRing 3s ease-in-out .5s infinite}
+@keyframes nodePulse{0%,100%{box-shadow:0 0 14px rgba(184,168,138,.1)}50%{box-shadow:0 0 32px rgba(184,168,138,.22)}}
+@keyframes nodePulseRing{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.7;transform:scale(1.04)}}
+
+/* Platform nodes — wider, content fully visible */
+.platform-node{position:absolute;transform:translate(-50%,-50%);background:rgba(8,8,8,.92);border:1px solid #1c1c1c;border-radius:8px;padding:12px 14px;cursor:pointer;z-index:1;transition:border-color .35s,box-shadow .35s,background .35s;min-width:150px;max-width:200px}
+.platform-node:hover{background:rgba(12,12,12,.97);box-shadow:0 4px 24px rgba(0,0,0,.5)}
+.platform-node[data-platform="rednote"]:hover{border-color:rgba(255,60,80,.4);box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 20px rgba(255,60,80,.08)}
+.platform-node[data-platform="douyin"]:hover{border-color:rgba(0,180,190,.35);box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 20px rgba(0,180,190,.08)}
+.platform-node[data-platform="bilibili"]:hover{border-color:rgba(100,150,210,.35);box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 20px rgba(100,150,210,.08)}
+.platform-node[data-platform="channels"]:hover{border-color:rgba(80,170,110,.35);box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 20px rgba(80,170,110,.08)}
+.platform-node-name{font-size:12px;font-weight:700;color:#c0c0c0;letter-spacing:.06em;margin-bottom:2px;transition:color .35s}
+.platform-node-cn{font-size:10px;color:#606060;letter-spacing:.04em;margin-bottom:8px;transition:color .35s}
+.platform-node:hover .platform-node-cn{color:#909090}
+.platform-node-tags{display:flex;flex-wrap:wrap;gap:4px}
+.platform-node-tag{font-size:9px;color:#585858;padding:3px 8px;border-radius:3px;background:rgba(255,255,255,.02);border:1px solid #1a1a1a;letter-spacing:.03em;transition:all .35s;white-space:nowrap}
+.platform-node:hover .platform-node-tag{color:#a0a0a0;border-color:#2a2a2a}
+.platform-node[data-platform="rednote"]:hover .platform-node-tag{color:rgba(255,60,80,.55);border-color:rgba(255,60,80,.18);background:rgba(255,60,80,.04)}
+.platform-node[data-platform="douyin"]:hover .platform-node-tag{color:rgba(0,180,190,.55);border-color:rgba(0,180,190,.18);background:rgba(0,180,190,.04)}
+.platform-node[data-platform="bilibili"]:hover .platform-node-tag{color:rgba(100,150,210,.55);border-color:rgba(100,150,210,.18);background:rgba(100,150,210,.04)}
+.platform-node[data-platform="channels"]:hover .platform-node-tag{color:rgba(80,170,110,.55);border-color:rgba(80,170,110,.18);background:rgba(80,170,110,.04)}
+
+/* Signal pulse ring on meter hover */
+.dist-pulse-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;border-radius:50%;border:1px solid rgba(184,168,138,.4);pointer-events:none;animation:sigPulseOut .7s ease-out forwards}
+@keyframes sigPulseOut{0%{width:10px;height:10px;opacity:.7}100%{width:90px;height:90px;opacity:0}}
+
+/* Clip fly animation */
+.cut-clip-fly{position:fixed;z-index:200;pointer-events:none;border-radius:2px;transition:all .7s cubic-bezier(.25,.8,.25,1)}
+.cut-clip-fly.video{background:rgba(184,168,138,.5)}
+.cut-clip-fly.audio{background:rgba(232,150,12,.5)}
+.cut-clip-fly.text{background:rgba(94,167,200,.5)}
+.cut-clip-fly.semantic{background:rgba(160,140,180,.5)}
+.cut-clip-fly.human{background:rgba(180,140,140,.5)}
+
+/* Data return dots */
+.data-return-dot{position:fixed;width:3px;height:3px;border-radius:50%;background:#B8A88A;pointer-events:none;z-index:199;box-shadow:0 0 4px rgba(184,168,138,.5);transition:all .8s cubic-bezier(.25,.8,.25,1);opacity:0}
+
+/* Timeline clip highlight for platform hover */
+.cut-clip.highlight{opacity:1!important;box-shadow:0 0 10px rgba(184,168,138,.4)}
+
+/* Responsive */
+@media(max-width:768px){
+  .cut-distribution-row{grid-template-columns:1fr;gap:18px}
+  .dist-meter-value{font-size:26px}
+  .dist-meter-ring{width:70px;height:70px}
+  .dist-meter-wave{height:18px;gap:2px}
+  .dist-meter-wave .wf-bar{width:2px}
+  .platform-graph{height:260px}
+  .platform-node{min-width:100px;max-width:150px;padding:8px 10px}
+  .platform-node-name{font-size:9px}
+  .platform-node-tag{font-size:7px;white-space:normal}
+  .dist-signal-canvas{height:14px}
+}
 
 /* ═══════════ SIGNAL — Radar Station ═══════════ */
 #sec-signal{text-align:center}
@@ -429,22 +571,22 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .signal-point{position:absolute;transform:translate(-50%,-50%);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2}
 .signal-point-dot{width:6px;height:6px;border-radius:50%;background:rgba(94,167,200,.5);box-shadow:0 0 8px rgba(94,167,200,.3);transition:all .35s}
 .signal-point:hover .signal-point-dot{background:rgba(94,167,200,.9);box-shadow:0 0 16px rgba(94,167,200,.6);transform:scale(1.5)}
-.signal-point-label{font-size:8px;color:rgba(255,255,255,.2);letter-spacing:.12em;transition:color .35s}
+.signal-point-label{font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.12em;transition:color .35s}
 .signal-point:hover .signal-point-label{color:rgba(94,167,200,.7)}
-.signal-point-value{font-size:10px;color:transparent;letter-spacing:.04em;opacity:0;transform:translateY(-4px);transition:all .35s;position:absolute;top:-28px;white-space:nowrap;background:rgba(8,8,8,.85);padding:4px 10px;border-radius:3px;border:1px solid rgba(94,167,200,.15)}
+.signal-point-value{font-size:11px;color:transparent;letter-spacing:.04em;opacity:0;transform:translateY(-4px);transition:all .35s;position:absolute;top:-28px;white-space:nowrap;background:rgba(8,8,8,.85);padding:4px 10px;border-radius:3px;border:1px solid rgba(94,167,200,.15)}
 .signal-point:hover .signal-point-value{color:rgba(255,255,255,.7);opacity:1;transform:translateY(0)}
-.signal-center-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:15px;color:rgba(255,255,255,.5);font-weight:700;letter-spacing:.05em;z-index:1;text-shadow:0 0 20px rgba(94,167,200,.2)}
+.signal-center-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:16px;color:rgba(255,255,255,.5);font-weight:700;letter-spacing:.05em;z-index:1;text-shadow:0 0 20px rgba(94,167,200,.2)}
 .signal-meta{display:flex;flex-direction:column;gap:10px;align-items:center}
-.signal-meta-row{display:flex;align-items:center;gap:8px;font-size:11px}
+.signal-meta-row{display:flex;align-items:center;gap:8px;font-size:12px}
 .signal-meta-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
-.signal-meta-label{color:#606060;letter-spacing:.12em;font-size:9px}
+.signal-meta-label{color:#606060;letter-spacing:.12em;font-size:10px}
 .signal-meta-value{color:#a0a0a0;letter-spacing:.04em}
 .signal-meta-value.accent{color:var(--accent)}
-.signal-whisper{font-size:11px;color:#606060;transition:color 2s}
+.signal-whisper{font-size:12px;color:#606060;transition:color 2s}
 .signal-whisper:hover{color:var(--dim)}
 
 .cinema-section-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
-.cinema-section-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(123,94,167,.02) 0%,transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(100,80,140,.015) 0%,transparent 50%)}
+.cinema-section-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(15,168,158,.02) 0%,transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(10,140,130,.015) 0%,transparent 50%)}
 
 /* ═══════════ SECTION: dark background override ═══════════ */
 #sec-cinema.active{background:#080808;position:relative;z-index:1;padding:40px 48px;min-height:100%}
@@ -618,7 +760,7 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
         </div>
       </div>
       <div class="cinema-title-block">
-        <span class="cinema-title-main">国家安全局 AI 一镜到底 MV 宣传片</span>
+        <span class="cinema-title-main">部委直属单位 AI 一镜到底 MV 宣传片</span>
         <span class="cinema-title-sub">AI ONE-SHOT MUSIC VIDEO FOR OFFICIAL CAMPAIGN</span>
       </div>
       <div class="cinema-layout">
@@ -651,13 +793,13 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
           </div>
           <div class="cinema-desc-block">
             <span class="cinema-desc-label">PROJECT_BRIEF // 项目概述</span>
-            <p class="cinema-desc-text">面向<strong>高规格官方宣发需求</strong>，为国家安全局打造一支AI驱动的<strong>一镜到底MV宣传片</strong>。项目突破传统视频制作流程，采用<strong>AI生成+人工精修</strong>混合管线。从主题概念拆解、分镜路径规划、模型选型评估，到提示词工程调优与最终视听交付，全流程探索<strong>AI在官方宣传影像中的表达边界</strong>。核心挑战在于保持一镜到底的<strong>时空连续性</strong>与官方视觉语言的<strong>庄重克制</strong>之间的平衡。</p>
+            <p class="cinema-desc-text">面向<strong>高规格官方宣发需求</strong>，为部委直属单位打造一支AI驱动的<strong>一镜到底MV宣传片</strong>。项目突破传统视频制作流程，采用<strong>AI生成+人工精修</strong>混合管线。从主题概念拆解、分镜路径规划、模型选型评估，到提示词工程调优与最终视听交付，全流程探索<strong>AI在官方宣传影像中的表达边界</strong>。核心挑战在于保持一镜到底的<strong>时空连续性</strong>与官方视觉语言的<strong>庄重克制</strong>之间的平衡。</p>
           </div>
         </div>
         <div class="cinema-monitor">
           <div class="cinema-monitor-frame">
             <div class="cinema-monitor-inner">
-              <img src="国安资料/image.png" alt="国家安全局 AI 一镜到底 MV" class="cinema-monitor-img" onerror="this.style.display='none'">
+              <img src="国安资料/image.png" alt="部委直属单位 AI 一镜到底 MV" class="cinema-monitor-img" onerror="this.style.display='none'">
               <div class="cinema-monitor-vignette"></div>
             </div>
             <div class="cinema-monitor-corners"></div>
@@ -744,6 +886,46 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
         </div>
         <div class="cut-pipeline" id="cutStages"></div>
         <div class="cut-insight-footer" id="cutInsight"></div>
+        <!-- Distribution Feedback + Platform Matrix -->
+        <div class="cut-distribution-row">
+          <div class="dist-feedback">
+            <div class="dist-feedback-header">
+              <span>DISTRIBUTION FEEDBACK</span>
+              <span>传播效果回流</span>
+            </div>
+            <div class="dist-meters" id="distMeters">
+              <div class="dist-meter" data-metric="followers">
+                <svg class="dist-meter-ring" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(184,168,138,.08)" stroke-width="2"/><circle cx="40" cy="40" r="34" fill="none" stroke="#B8A88A" stroke-width="2" stroke-dasharray="0 214" stroke-linecap="round" class="dist-ring-fill" id="ringFollowers"/></svg>
+                <span class="dist-meter-value" id="dvFollowers">0</span>
+                <div class="dist-meter-wave" id="dwFollowers"></div>
+                <span class="dist-meter-label">FOLLOWERS 粉丝增长</span>
+              </div>
+              <div class="dist-meter" data-metric="plays">
+                <svg class="dist-meter-ring" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(184,168,138,.08)" stroke-width="2"/><circle cx="40" cy="40" r="34" fill="none" stroke="#B8A88A" stroke-width="2" stroke-dasharray="0 214" stroke-linecap="round" class="dist-ring-fill" id="ringPlays"/></svg>
+                <span class="dist-meter-value" id="dvPlays">0</span>
+                <div class="dist-meter-wave" id="dwPlays"></div>
+                <span class="dist-meter-label">PLAYS 累计播放</span>
+              </div>
+              <div class="dist-meter" data-metric="likes">
+                <svg class="dist-meter-ring" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(184,168,138,.08)" stroke-width="2"/><circle cx="40" cy="40" r="34" fill="none" stroke="#B8A88A" stroke-width="2" stroke-dasharray="0 214" stroke-linecap="round" class="dist-ring-fill" id="ringLikes"/></svg>
+                <span class="dist-meter-value" id="dvLikes">0</span>
+                <div class="dist-meter-wave" id="dwLikes"></div>
+                <span class="dist-meter-label">LIKES 点赞反馈</span>
+              </div>
+            </div>
+            <canvas class="dist-signal-canvas" id="distSignalCanvas"></canvas>
+          </div>
+          <div class="platform-matrix">
+            <div class="platform-matrix-header">
+              <span>PLATFORM MATRIX</span>
+              <span>内容信号分发网络</span>
+            </div>
+            <div class="platform-graph" id="platformGraph">
+              <svg class="platform-connectors" id="platformConnectors"></svg>
+              <div class="platform-center" id="platformCenter">CUT<br>OUTPUT</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -854,10 +1036,10 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 <script>
 // ═══════════ DATA ═══════════
 const SOUND_PHASES = [
-  { id:"phase-1", songTitle:"序曲：初创统筹", songMeta:"Overture · 2024.05 — 2024.06", role:"产品实习生 · 项目统筹", coverImg:"choir/page2_3.jpg", verse:"入职第一周即接手合唱团产品的初期调研。梳理芒果TV音乐频道用户画像，分析竞品（全民K歌、唱吧）的合唱功能差异点，形成12页竞品报告。", chorus:"主导完成'K歌弹幕'核心玩法的产品定义。将传统弹幕从文字升级为声音——用户录制的歌声以弹幕形式飘过节目画面，实现'万人同唱'的沉浸听感。这个想法来自对B站弹幕文化和K歌App的交叉洞察。", bridge:"跨部门推动方案落地：协调播放器组（音频技术）、运营组（节目排期）、设计组（弹幕动效）三方资源，在2周内完成PRD撰写和首版原型。最大挑战是让技术团队相信'声音弹幕'不是天方夜谭。", outro:"PRD全票通过评审。项目进入正式开发排期，获产品委员会'最具创新玩法'提名。", skills:["产品规划","竞品分析","跨部门协调","PRD撰写"], accentNote:"A3" },
-  { id:"phase-2", songTitle:"进行曲：技术攻坚", songMeta:"March · 2024.06 — 2024.07", role:"产品实习生 · 技术选型负责人", coverImg:"choir/page3_2.jpg", verse:"发现播放器组提供的音频处理方案存在严重缺陷：APP崩溃率高达8%，且多人合唱时音频延迟超过300ms，体验不可用。主动调研外部技术方案。", chorus:"推动采购声网「凤鸣AI」音频引擎（全年4.5w预算），替换原有方案。核心选型指标：① 多人实时合唱的音频同步延迟 < 50ms；② 声音采集优化不破坏用户原始音色；③ SDK接入稳定性 > 99.5%。", bridge:"与技术团队共同完成SDK接入测试，编写《凤鸣AI接入指南》文档，将接入周期从预估4周压缩至10天。亲自录制了200条测试音频用于AI评分模型调参。", outro:"声网凤鸣AI成功接入。APP崩溃率降至0.3%，音频延迟降至40ms以内。7月产品顺利上线。", skills:["技术选型","供应商评估","SDK接入","测试管理"], accentNote:"E4" },
-  { id:"phase-3", songTitle:"副歌：高燃现场", songMeta:"Chorus · 2024.07 — 2024.09", role:"产品实习生 · 运营推广", coverImg:"choir/page5_2.jpg", verse:"产品上线后负责联动《时光音乐会3》的整合营销。策划'超女时代金曲返场'主题活动：让用户投票选出历届超女经典歌曲，票选Top10进入合唱曲库。", chorus:"四阶段产品推广链条：① 返场公投（7天内30万用户参与投票）→ ② 演唱打榜（KOL带动粉丝参与合唱）→ ③ 原唱演绎（超女原唱在节目中再次演绎，十年两版同屏）→ ④ 同屏接唱（三人合唱版：2位歌手 + 屏幕前的用户）。", bridge:"运营期间日均活跃用户从0增长至12万，单曲最高合唱次数突破8万次。协调法务团队解决了历届超女歌曲的视频/音频使用版权问题，这是整个活动能否上线的关键节点。", outro:"《时光音乐会3》播出期间，合唱团DAU稳定在8万以上。用户自发分享'我与超女同唱'片段在微博形成二次传播，话题阅读量破2000万。", skills:["整合营销","用户增长","版权协调","活动策划"], accentNote:"G4" },
-  { id:"phase-4", songTitle:"尾声：数据复盘", songMeta:"Finale · 2024.09 — 至今", role:"产品实习生 · 数据与策略", coverImg:"choir/page3_7.jpg", verse:"对合唱团产品全周期数据进行系统性复盘。建立了包括用户留存（次日45%/7日22%）、合唱完成率（68%）、分享率（31%）在内的核心指标体系。", chorus:"撰写《芒果合唱团产品复盘报告》（28页），总结了三条核心经验：① UGC内容的'情感密度'比'技术完美度'更能预测传播力（基于12万条用户音频的回归分析）；② 明星合唱的'亲近感'比'还原度'更重要——用户不想要完美的AI明星，想要有瑕疵的共唱体验；③ 弹幕式合唱的社交属性是留存的核心驱动。", bridge:"基于复盘数据，提出长期产品方向：AI明星音色克隆合唱。用户可选择喜爱的AI明星音色，与之共创合唱曲目。正在撰写技术可行性与版权方案。", outro:"产品复盘报告被产品VP评为'年度最具洞察力的实习作品'。完整指标体系被纳入芒果TV音乐频道日常监控看板。", skills:["数据分析","用户研究","策略规划","报告撰写"], accentNote:"C5" }
+  { id:"phase-1", songTitle:"序曲：初创统筹", songMeta:"Overture · 2024.05 — 2024.06", role:"产品实习生 · 项目统筹", coverImg:"choir/page2_3.jpg", images:["choir/page2_3.jpg"], verse:"入职第一周即接手合唱团产品的初期调研。梳理芒果TV音乐频道用户画像，分析竞品（全民K歌、唱吧）的合唱功能差异点，形成12页竞品报告。", chorus:"主导完成'K歌弹幕'核心玩法的产品定义。将传统弹幕从文字升级为声音——用户录制的歌声以弹幕形式飘过节目画面，实现'万人同唱'的沉浸听感。这个想法来自对B站弹幕文化和K歌App的交叉洞察。", bridge:"跨部门推动方案落地：协调播放器组（音频技术）、运营组（节目排期）、设计组（弹幕动效）三方资源，在2周内完成PRD撰写和首版原型。最大挑战是让技术团队相信'声音弹幕'不是天方夜谭。", outro:"PRD全票通过评审。项目进入正式开发排期，获产品委员会'最具创新玩法'提名。", skills:["产品规划","竞品分析","跨部门协调","PRD撰写"], accentNote:"A3" },
+  { id:"phase-2", songTitle:"进行曲：技术攻坚", songMeta:"March · 2024.06 — 2024.07", role:"产品实习生 · 技术选型负责人", coverImg:"choir/page2_5.jpg", images:["choir/page2_5.jpg","choir/page4_1.jpg"], verse:"发现播放器组提供的音频处理方案存在严重缺陷：APP崩溃率高达8%，且多人合唱时音频延迟超过300ms，体验不可用。主动调研外部技术方案。", chorus:"推动采购声网「凤鸣AI」音频引擎（全年4.5w预算），替换原有方案。核心选型指标：① 多人实时合唱的音频同步延迟 < 50ms；② 声音采集优化不破坏用户原始音色；③ SDK接入稳定性 > 99.5%。", bridge:"与技术团队共同完成SDK接入测试，编写《凤鸣AI接入指南》文档，将接入周期从预估4周压缩至10天。亲自录制了200条测试音频用于AI评分模型调参。", outro:"声网凤鸣AI成功接入。APP崩溃率降至0.3%，音频延迟降至40ms以内。7月产品顺利上线。", skills:["技术选型","供应商评估","SDK接入","测试管理"], accentNote:"E4" },
+  { id:"phase-3", songTitle:"副歌：高燃现场", songMeta:"Chorus · 2024.07 — 2024.09", role:"产品实习生 · 运营推广", coverImg:"choir/page2_6.jpg", images:["choir/page2_6.jpg","choir/page3_2.jpg","choir/page3_9.jpg"], verse:"产品上线后负责联动《时光音乐会3》的整合营销。策划'超女时代金曲返场'主题活动：让用户投票选出历届超女经典歌曲，票选Top10进入合唱曲库。", chorus:"四阶段产品推广链条：① 返场公投（7天内30万用户参与投票）→ ② 演唱打榜（KOL带动粉丝参与合唱）→ ③ 原唱演绎（超女原唱在节目中再次演绎，十年两版同屏）→ ④ 同屏接唱（三人合唱版：2位歌手 + 屏幕前的用户）。", bridge:"运营期间日均活跃用户从0增长至12万，单曲最高合唱次数突破8万次。协调法务团队解决了历届超女歌曲的视频/音频使用版权问题，这是整个活动能否上线的关键节点。", outro:"《时光音乐会3》播出期间，合唱团DAU稳定在8万以上。用户自发分享'我与超女同唱'片段在微博形成二次传播，话题阅读量破2000万。", skills:["整合营销","用户增长","版权协调","活动策划"], accentNote:"G4" },
+  { id:"phase-4", songTitle:"尾声：数据复盘", songMeta:"Finale · 2024.09 — 至今", role:"产品实习生 · 数据与策略", coverImg:"choir/page3_6.jpg", images:["choir/page3_6.jpg","choir/page3_7.jpg","choir/page3_8.jpg"], verse:"对合唱团产品全周期数据进行系统性复盘。建立了包括用户留存（次日45%/7日22%）、合唱完成率（68%）、分享率（31%）在内的核心指标体系。", chorus:"撰写《芒果合唱团产品复盘报告》（28页），总结了三条核心经验：① UGC内容的'情感密度'比'技术完美度'更能预测传播力（基于12万条用户音频的回归分析）；② 明星合唱的'亲近感'比'还原度'更重要——用户不想要完美的AI明星，想要有瑕疵的共唱体验；③ 弹幕式合唱的社交属性是留存的核心驱动。", bridge:"基于复盘数据，提出长期产品方向：AI明星音色克隆合唱。用户可选择喜爱的AI明星音色，与之共创合唱曲目。正在撰写技术可行性与版权方案。", outro:"产品复盘报告被产品VP评为'年度最具洞察力的实习作品'。完整指标体系被纳入芒果TV音乐频道日常监控看板。", skills:["数据分析","用户研究","策略规划","报告撰写"], accentNote:"C5" }
 ];
 
 const INTERVIEW_CASES = [
@@ -872,6 +1054,19 @@ const EQ_BANDS = [
   { id:"groove", num:"02", label:"GROOVE", sub:"音乐" },
   { id:"cut", num:"03", label:"CUT", sub:"剪辑" },
   { id:"signal", num:"04", label:"SIGNAL", sub:"联系" }
+];
+
+const DIST_METRICS = [
+  { id:'followers', target:1086, label:'FOLLOWERS', sub:'粉丝增长' },
+  { id:'plays', target:128000, label:'PLAYS', sub:'累计播放' },
+  { id:'likes', target:5720, label:'LIKES', sub:'点赞反馈' }
+];
+
+const PLATFORMS = [
+  { id:'rednote', name:'REDNOTE', cn:'小红书', tags:['情绪价值','封面标题','图文视频种草'], color:'rgba(255,60,80,.25)', accent:'rgba(255,60,80,.5)' },
+  { id:'douyin', name:'DOUYIN', cn:'抖音', tags:['强钩子','快节奏','高互动短视频'], color:'rgba(0,180,190,.2)', accent:'rgba(0,180,190,.4)' },
+  { id:'bilibili', name:'BILIBILI', cn:'B站', tags:['长内容结构','深度解释','社区语境'], color:'rgba(100,150,210,.2)', accent:'rgba(100,150,210,.4)' },
+  { id:'channels', name:'CHANNELS', cn:'视频号', tags:['社交转发','公共表达','稳定触达'], color:'rgba(80,170,110,.2)', accent:'rgba(80,170,110,.4)' }
 ];
 
 // ═══════════ STATE ═══════════
@@ -1031,12 +1226,12 @@ let entryPinchTension = 0;
 let entryCameraAnimId = null;
 let entryCameraActive = false;
 
-// Timbre groups for 30 strings (0-indexed)
+// Harp timbre groups for 30 strings — bass / mid-low / mid-high / treble
 function getStringTimbre(i) {
-  if (i < 7) return 'wood';       // 0-6: deep wooden
-  if (i < 14) return 'metal';     // 7-13: metallic bright
-  if (i < 21) return 'glass';     // 14-20: glass ethereal
-  return 'chime';                  // 21-29: harmonic chime
+  if (i < 8) return 'bass';         // 0-7: deep resonant bass  (55-150Hz)
+  if (i < 15) return 'midlow';      // 8-14: warm mid-low       (150-300Hz)
+  if (i < 22) return 'midhigh';     // 15-21: bright mid-high   (300-580Hz)
+  return 'treble';                   // 22-29: airy treble       (580-1200Hz)
 }
 
 // ─── Audio engine ───
@@ -1084,8 +1279,8 @@ async function entryInitCamera() {
   hands.setOptions({
     maxNumHands: 1,
     modelComplexity: 1,
-    minDetectionConfidence: 0.7,
-    minTrackingConfidence: 0.6,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5,
   });
 
   hands.onResults(onHandResults);
@@ -1146,7 +1341,7 @@ function onHandResults(results) {
       Math.pow(thumbTip.z - indexTip.z, 2)
     );
 
-    const isPinching = pinchDist < 0.06;
+    const isPinching = pinchDist < 0.08;
 
     if (isPinching !== entryIsPinching) {
       entryIsPinching = isPinching;
@@ -1210,8 +1405,8 @@ function entryHandleCameraPinchMove() {
 
   // Build tension
   const tensionGain = entryHandVisible ? 0.02 : 0.005;
-  entryPinchTension = Math.min(15, entryPinchTension + 1.5 + tensionGain * 3);
-  entryStringTension[entryPinchStringIdx] = Math.min(15, entryStringTension[entryPinchStringIdx] + 1.5);
+  entryPinchTension = Math.min(15, entryPinchTension + 2.0 + tensionGain * 4);
+  entryStringTension[entryPinchStringIdx] = Math.min(15, entryStringTension[entryPinchStringIdx] + 2.0);
 
   // Pull the string
   const pullAmount = entryPinchTension * 0.3;
@@ -1280,83 +1475,86 @@ function entryPlayPluck(index) {
   if (!ctx) return;
   const now = ctx.currentTime;
   const timbre = getStringTimbre(index);
-  const pos = index / (NUM_STRINGS - 1); // 0..1 position along strings
+  const pos = index / (NUM_STRINGS - 1);
 
-  // Base frequency range: 80Hz (left) to 880Hz (right) — wider range
-  const freq = 80 + pos * 800;
-
-  // ── Timbre-specific synthesis ──
+  // Harp frequency range: 55Hz (bass) → 1200Hz (treble), exponential curve
+  const freq = 55 * Math.pow(1200 / 55, pos);
   const period = 1 / freq;
-  const delaySamples = Math.round(ctx.sampleRate * period);
 
-  if (timbre === 'wood') {
-    // Deep wooden: rich low end, strong lowpass, resonant body
-    const noiseLen = Math.round(ctx.sampleRate * 0.06);
-    const buffer = ctx.createBuffer(1, noiseLen, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < noiseLen; i++) data[i] = (Math.random() * 2 - 1) * 0.35;
-    const delay = ctx.createDelay(period * 1.01);
-    const fb = ctx.createGain(); fb.gain.value = 0.985;
-    const wet = ctx.createGain(); wet.gain.setValueAtTime(0.18, now); wet.gain.exponentialRampToValueAtTime(0.001, now + 3.2);
-    const f1 = ctx.createBiquadFilter(); f1.type = 'lowpass'; f1.frequency.value = 180 + pos * 120; f1.Q.value = 0.4;
-    const f2 = ctx.createBiquadFilter(); f2.type = 'lowshelf'; f2.frequency.value = 150; f2.gain.value = 6;
-    const src = ctx.createBufferSource(); src.buffer = buffer;
-    src.connect(delay); delay.connect(fb); fb.connect(delay); delay.connect(f1); f1.connect(f2); f2.connect(wet); wet.connect(ctx.destination);
-    src.start(now); src.stop(now + 3);
-  } else if (timbre === 'metal') {
-    // Metallic: bright, sharp attack, bandpass emphasis, quick decay
-    const noiseLen = Math.round(ctx.sampleRate * 0.03);
-    const buffer = ctx.createBuffer(1, noiseLen, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < noiseLen; i++) data[i] = (Math.random() * 2 - 1) * 0.45;
+  // Bright impulse: short noise burst for the "pluck" attack
+  const impulseLen = Math.round(ctx.sampleRate * 0.01);
+  const impulseBuf = ctx.createBuffer(1, impulseLen, ctx.sampleRate);
+  const impData = impulseBuf.getChannelData(0);
+  for (let i = 0; i < impulseLen; i++) impData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (impulseLen * 0.18));
+
+  // Triangle oscillator for pitch body (richer than sine)
+  const osc = ctx.createOscillator(); osc.type = 'triangle';
+  osc.frequency.value = freq;
+  const oscG = ctx.createGain();
+
+  if (timbre === 'bass') {
+    // Deep harp bass: 55-150Hz — warm, long resonant decay
+    const delay = ctx.createDelay(period * 1.0);
+    const fb = ctx.createGain(); fb.gain.value = 0.986;
+    const wet = ctx.createGain();
+    wet.gain.setValueAtTime(0.24, now); wet.gain.exponentialRampToValueAtTime(0.001, now + 5.0);
+    const fLow = ctx.createBiquadFilter(); fLow.type = 'lowpass'; fLow.frequency.value = 260 + pos * 100; fLow.Q.value = 0.3;
+    const fShelf = ctx.createBiquadFilter(); fShelf.type = 'lowshelf'; fShelf.frequency.value = 140; fShelf.gain.value = 9;
+    const src = ctx.createBufferSource(); src.buffer = impulseBuf;
+    src.connect(delay); delay.connect(fb); fb.connect(delay); delay.connect(fLow); fLow.connect(fShelf); fShelf.connect(wet); wet.connect(ctx.destination);
+    const delay2 = ctx.createDelay(period * 2.01);
+    const fb2 = ctx.createGain(); fb2.gain.value = 0.93;
+    delay.connect(delay2); delay2.connect(fb2); fb2.connect(delay2); delay2.connect(fLow);
+    oscG.gain.setValueAtTime(0.07, now + 0.003); oscG.gain.exponentialRampToValueAtTime(0.001, now + 4.0);
+    osc.connect(oscG); oscG.connect(fShelf);
+    src.start(now); src.stop(now + 4.5); osc.start(now); osc.stop(now + 4);
+
+  } else if (timbre === 'midlow') {
+    // Warm mid-low: 150-300Hz — balanced, singing tone
     const delay = ctx.createDelay(period * 0.5);
-    const fb = ctx.createGain(); fb.gain.value = 0.96;
-    const wet = ctx.createGain(); wet.gain.setValueAtTime(0.13, now); wet.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
-    const f1 = ctx.createBiquadFilter(); f1.type = 'bandpass'; f1.frequency.value = 800 + pos * 600; f1.Q.value = 2.5;
-    const src = ctx.createBufferSource(); src.buffer = buffer;
+    const fb = ctx.createGain(); fb.gain.value = 0.97;
+    const wet = ctx.createGain();
+    wet.gain.setValueAtTime(0.17, now); wet.gain.exponentialRampToValueAtTime(0.001, now + 3.5);
+    const f1 = ctx.createBiquadFilter(); f1.type = 'lowpass'; f1.frequency.value = 500 + pos * 300; f1.Q.value = 0.4;
+    const f2 = ctx.createBiquadFilter(); f2.type = 'peaking'; f2.frequency.value = freq * 2; f2.Q.value = 2; f2.gain.value = 4;
+    const src = ctx.createBufferSource(); src.buffer = impulseBuf;
+    src.connect(delay); delay.connect(fb); fb.connect(delay); delay.connect(f1); f1.connect(f2); f2.connect(wet); wet.connect(ctx.destination);
+    oscG.gain.setValueAtTime(0.05, now + 0.003); oscG.gain.exponentialRampToValueAtTime(0.001, now + 3.0);
+    osc.connect(oscG); oscG.connect(f2);
+    src.start(now); src.stop(now + 3); osc.start(now); osc.stop(now + 3);
+
+  } else if (timbre === 'midhigh') {
+    // Bright mid-high: 300-580Hz — sparkle, clear pitch
+    const delay = ctx.createDelay(period * 0.25);
+    const fb = ctx.createGain(); fb.gain.value = 0.94;
+    const wet = ctx.createGain();
+    wet.gain.setValueAtTime(0.13, now); wet.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
+    const f1 = ctx.createBiquadFilter(); f1.type = 'bandpass'; f1.frequency.value = freq * 1.5 + 200; f1.Q.value = 2.5;
+    const src = ctx.createBufferSource(); src.buffer = impulseBuf;
     src.connect(delay); delay.connect(fb); fb.connect(delay); delay.connect(f1); f1.connect(wet); wet.connect(ctx.destination);
-    src.start(now); src.stop(now + 1.5);
-  } else if (timbre === 'glass') {
-    // Glass/ethereal: high frequency, comb-like resonance, long delicate tail
-    const noiseLen = Math.round(ctx.sampleRate * 0.08);
-    const buffer = ctx.createBuffer(1, noiseLen, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < noiseLen; i++) data[i] = (Math.random() * 2 - 1) * 0.15;
-    // Two parallel delays for comb effect
-    const delay1 = ctx.createDelay(period);
-    const delay2 = ctx.createDelay(period * 1.47);
-    const fb1 = ctx.createGain(); fb1.gain.value = 0.93;
-    const fb2 = ctx.createGain(); fb2.gain.value = 0.91;
-    const wet = ctx.createGain(); wet.gain.setValueAtTime(0.08, now); wet.gain.exponentialRampToValueAtTime(0.001, now + 4.0);
-    const f1 = ctx.createBiquadFilter(); f1.type = 'highpass'; f1.frequency.value = 200 + pos * 300; f1.Q.value = 0.3;
-    const f2 = ctx.createBiquadFilter(); f2.type = 'peaking'; f2.frequency.value = freq * 3; f2.Q.value = 4; f2.gain.value = 5;
-    const src = ctx.createBufferSource(); src.buffer = buffer;
-    src.connect(delay1); delay1.connect(fb1); fb1.connect(delay1); delay1.connect(f1);
-    src.connect(delay2); delay2.connect(fb2); fb2.connect(delay2); delay2.connect(f1);
-    f1.connect(f2); f2.connect(wet); wet.connect(ctx.destination);
-    src.start(now); src.stop(now + 4);
+    oscG.gain.setValueAtTime(0.04, now + 0.002); oscG.gain.exponentialRampToValueAtTime(0.001, now + 2.0);
+    osc.connect(oscG); oscG.connect(f1);
+    src.start(now); src.stop(now + 2); osc.start(now); osc.stop(now + 2);
+
   } else {
-    // Chime: very short ping, comb via tuned delays, shimmer tail
-    const noiseLen = Math.round(ctx.sampleRate * 0.015);
-    const buffer = ctx.createBuffer(1, noiseLen, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < noiseLen; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
-    // Three delays for harmonic shimmer
-    const delay1 = ctx.createDelay(period * 0.25);
-    const delay2 = ctx.createDelay(period * 0.33);
-    const delay3 = ctx.createDelay(period * 1.5);
-    const fb1 = ctx.createGain(); fb1.gain.value = 0.88;
+    // Airy treble: 580-1200Hz — bell-like chime, short delicate ring
+    const delay = ctx.createDelay(period * 0.5);
+    const fb = ctx.createGain(); fb.gain.value = 0.90;
+    const wet = ctx.createGain();
+    wet.gain.setValueAtTime(0.10, now); wet.gain.exponentialRampToValueAtTime(0.001, now + 2.0);
+    const f1 = ctx.createBiquadFilter(); f1.type = 'bandpass'; f1.frequency.value = freq * 2; f1.Q.value = 3.5;
+    const f2 = ctx.createBiquadFilter(); f2.type = 'highpass'; f2.frequency.value = 600 + pos * 400; f2.Q.value = 0.4;
+    const delay2 = ctx.createDelay(period * 1.47);
     const fb2 = ctx.createGain(); fb2.gain.value = 0.85;
-    const fb3 = ctx.createGain(); fb3.gain.value = 0.9;
-    const wet = ctx.createGain(); wet.gain.setValueAtTime(0.1, now); wet.gain.exponentialRampToValueAtTime(0.001, now + 3.5);
-    const f1 = ctx.createBiquadFilter(); f1.type = 'bandpass'; f1.frequency.value = freq * 2; f1.Q.value = 3;
-    const f2 = ctx.createBiquadFilter(); f2.type = 'highpass'; f2.frequency.value = 400 + pos * 600; f2.Q.value = 0.5;
-    const src = ctx.createBufferSource(); src.buffer = buffer;
-    src.connect(delay1); delay1.connect(fb1); fb1.connect(delay1); delay1.connect(f1);
-    delay1.connect(delay2); delay2.connect(fb2); fb2.connect(delay2); delay2.connect(f1);
-    delay1.connect(delay3); delay3.connect(fb3); fb3.connect(delay3); delay3.connect(f1);
+    const src = ctx.createBufferSource(); src.buffer = impulseBuf;
+    src.connect(delay); delay.connect(fb); fb.connect(delay);
+    delay.connect(delay2); delay2.connect(fb2); fb2.connect(delay2);
+    delay.connect(f1); delay2.connect(f1);
     f1.connect(f2); f2.connect(wet); wet.connect(ctx.destination);
-    src.start(now); src.stop(now + 3);
+    osc.frequency.value = freq * 1.01;
+    oscG.gain.setValueAtTime(0.03, now + 0.002); oscG.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
+    osc.connect(oscG); oscG.connect(f2);
+    src.start(now); src.stop(now + 1.5); osc.start(now); osc.stop(now + 1.5);
   }
 }
 
@@ -1459,7 +1657,9 @@ function entryTickStrings() {
       if (mid) {
         const absDisp = Math.abs(s.displacement);
         const isActive = absDisp > 0.5;
-        let cls = 'entry-string-mid';
+        const timbre = getStringTimbre(i);
+        const baseClass = timbre === 'bass' ? 'entry-string-mid bass-str' : timbre === 'treble' ? 'entry-string-mid treble-str' : 'entry-string-mid';
+        let cls = baseClass;
         if (entryStringAfterglow[i] > 0.01) cls += ' afterglow';
         if (isActive) cls += ' active';
         mid.className = cls;
@@ -1611,8 +1811,8 @@ function entryHandlePointerMove(e) {
 
   // ── Build tension on current string ──
   if (speed > 1 || idx !== ptr.stringIdx) {
-    const tensionGain = Math.min(1, speed / 20);
-    const addTension = 1.5 + tensionGain * 3;
+    const tensionGain = Math.min(1, speed / 16);
+    const addTension = 2.0 + tensionGain * 4;
     ptr.tension = Math.min(15, ptr.tension + addTension);
     entryStringTension[idx] = Math.min(15, entryStringTension[idx] + addTension);
 
@@ -1874,7 +2074,12 @@ function entryBuildStrings() {
   for (let i = 0; i < NUM_STRINGS; i++) {
     const wrap = document.createElement('div');
     wrap.className = 'entry-string-wrap';
-    wrap.innerHTML = '<div class="entry-string-fixed top"></div><div class="entry-string-mid"></div><div class="entry-string-fixed bottom"></div>';
+    const timbre = getStringTimbre(i);
+    // Add bass/treble visual distinction
+    const rangeClass = timbre === 'bass' ? ' string-bass' : timbre === 'treble' ? ' string-treble' : '';
+    wrap.className += rangeClass;
+    const midClass = timbre === 'bass' ? 'entry-string-mid bass-str' : timbre === 'treble' ? 'entry-string-mid treble-str' : 'entry-string-mid';
+    wrap.innerHTML = '<div class="entry-string-fixed top"></div><div class="' + midClass + '"></div><div class="entry-string-fixed bottom"></div>';
     inner.appendChild(wrap);
   }
 }
@@ -2039,7 +2244,8 @@ function navigateTo(target) {
 
   // Init page-specific features
   if (target === 'signal') initSignalRadar();
-  if (target === 'cut') renderCutTimeline();
+  if (target === 'cut') { renderCutTimeline(); setTimeout(() => triggerClipFlySequence(), 400); }
+  if (target !== 'cut') distEntered = false;
 }
 
 // ═══════════ CINEMA ═══════════
@@ -2073,6 +2279,10 @@ function selectChapter(ch) {
     card.classList.toggle('active', card.getAttribute('data-chapter') === ch.id);
   });
   updateChapterDetail();
+  const detail = document.getElementById('cinemaChapterDetail');
+  detail.classList.remove('highlight');
+  void detail.offsetWidth;
+  detail.classList.add('highlight');
 }
 
 function updateChapterDetail() {
@@ -2137,8 +2347,10 @@ function renderSoundJournal() {
     return;
   }
   const phase = SOUND_PHASES.find(p => p.id === activeSongId);
+  const imgsHtml = phase.images ? '<div class="ep-journal-images">' + phase.images.map(img => '<img src="' + img + '" class="ep-journal-img" loading="lazy" onerror="this.style.display=\'none\'">').join('') + '</div>' : '';
   container.innerHTML = '<div class="ep-journal">' +
     '<div class="ep-journal-header"><span class="ep-journal-role">' + phase.role + '</span><span class="ep-journal-phase">' + phase.songMeta + '</span></div>' +
+    imgsHtml +
     '<div class="ep-lyrics">' +
     '<div class="ep-lyric-block verse"><span class="ep-lyric-label">— VERSE —</span><p class="ep-lyric-text">' + phase.verse + '</p></div>' +
     '<div class="ep-lyric-block chorus"><span class="ep-lyric-label">— CHORUS —</span><p class="ep-lyric-text">' + phase.chorus + '</p></div>' +
@@ -2148,7 +2360,7 @@ function renderSoundJournal() {
 }
 
 // ═══════════ CUT — AI Editing Suite ═══════════
-function initCut() { renderCutTabs(); renderCutStages(); renderCutTimeline(); }
+function initCut() { renderCutTabs(); renderCutStages(); renderCutTimeline(); initDistributionMeter(); initPlatformMatrix(); }
 
 function renderCutTimeline() {
   const c = INTERVIEW_CASES[activeCaseIndex];
@@ -2196,8 +2408,8 @@ function renderCutStages() {
   const stages = [
     { icon:'◉', name:'感知层', en:'Perception · ASR识别 + 内容结构化', meta:'ASR精度 <b>' + p.perception.asrAccuracy + '</b> · 说话人 <b>' + p.perception.speakerCount + '人</b> · 静默 <b>' + p.perception.silenceMarkers + '处</b> · 话题检测 <b>' + p.perception.topicsDetected + '个</b>', body:'<div class="cut-cog-label">源</div><div style="font-size:10px;color:#b8b8b8;letter-spacing:.03em">' + c.source + ' · ' + c.rawDuration + '</div>' },
     { icon:'◎', name:'认知层', en:'Cognition · 动态模板加载 + 策略生成', meta:'模板 <b>' + p.cognition.template + '</b> · 提示词 <b>' + p.cognition.promptLength + '</b>', body:'<div class="cut-cog-label">剪辑策略</div><p class="cut-cog-text">' + p.cognition.strategy + '</p><div class="cut-cog-tags">' + c.topicLabels.map(t => '<span class="cut-cog-tag">' + t + '</span>').join('') + '</div>' },
-    { icon:'◈', name:'行动层', en:'Action · EDL构建 + 渲染输出', meta:'剪辑段 <b>' + p.action.edlSegments + '段</b> · 输出 <b>' + p.action.renderFormat + '</b> · 均长 <b>' + p.action.avgSegment + '</b>', body:'<div class="cut-cog-label">结构化输出</div><div style="display:flex;gap:10px;align-items:center;font-size:9px;color:#a8a8a8;letter-spacing:.04em;margin-top:8px"><span>' + c.rawDuration + ' 原始</span><div style="flex:1;height:4px;background:#1c1c1c;border-radius:2px;overflow:hidden"><div style="height:100%;width:30%;background:var(--accent30);border-radius:2px"></div></div><span>' + c.processedDuration + ' 成片</span></div>' },
-    { icon:'↻', name:'反思层', en:'Reflection · 记忆反馈机制 + 多轮优化', meta:'迭代 <b>' + p.reflection.iterations + '轮</b> · 记忆保持 <b>' + p.reflection.memoryPreserved + '</b> · 改善 <b>' + p.reflection.improvement + '</b>', body:'<div class="cut-cog-label">记忆机制对比</div><div style="display:flex;align-items:center;gap:16px;margin-top:12px"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px;border-radius:6px;border:1px solid var(--border);background:#0a0a0a"><span style="font-size:10px;color:#b0b0b0;letter-spacing:.06em">无记忆机制</span><div style="display:flex;align-items:flex-end;gap:12px;height:56px">' + [0.45,0.38,0.22].map(h => '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;height:100%"><div style="width:18px;border-radius:2px;margin-top:auto;height:' + h*100 + '%;background:#2a2a2a"></div><span style="font-size:8px;color:#a8a8a8">R</span></div>').join('') + '</div><span style="font-size:10px;color:#b0b0b0">约束衰减 ✗</span></div><div style="font-size:10px;color:#909090;font-weight:700;flex-shrink:0">VS</div><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px;border-radius:6px;border:1px solid rgba(123,94,167,.25);background:rgba(123,94,167,.03)"><span style="font-size:10px;color:var(--accent);letter-spacing:.06em">有记忆机制</span><div style="display:flex;align-items:flex-end;gap:12px;height:56px">' + [0.45,0.72,0.94].map(h => '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;height:100%"><div style="width:18px;border-radius:2px;margin-top:auto;height:' + h*100 + '%;background:var(--accent)"></div><span style="font-size:8px;color:var(--accent)">R</span></div>').join('') + '</div><span style="font-size:10px;color:var(--accent)">约束全继承 ✓</span></div></div>' }
+    { icon:'◈', name:'行动层', en:'Action · EDL构建 + 渲染输出', meta:'剪辑段 <b>' + p.action.edlSegments + '段</b> · 输出 <b>' + p.action.renderFormat + '</b> · 均长 <b>' + p.action.avgSegment + '</b>', body:'<div class="cut-cog-label">结构化输出</div><div style="display:flex;gap:10px;align-items:center;font-size:9px;color:#a8a8a8;letter-spacing:.04em;margin-top:8px"><span>' + c.rawDuration + ' 原始</span><div style="flex:1;height:4px;background:#1c1c1c;border-radius:2px;overflow:hidden"><div style="height:100%;width:30%;background:rgba(184,168,138,.3);border-radius:2px"></div></div><span>' + c.processedDuration + ' 成片</span></div>' },
+    { icon:'↻', name:'反思层', en:'Reflection · 记忆反馈机制 + 多轮优化', meta:'迭代 <b>' + p.reflection.iterations + '轮</b> · 记忆保持 <b>' + p.reflection.memoryPreserved + '</b> · 改善 <b>' + p.reflection.improvement + '</b>', body:'<div class="cut-cog-label">记忆机制对比</div><div style="display:flex;align-items:center;gap:16px;margin-top:12px"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px;border-radius:6px;border:1px solid var(--border);background:#0a0a0a"><span style="font-size:10px;color:#b0b0b0;letter-spacing:.06em">无记忆机制</span><div style="display:flex;align-items:flex-end;gap:12px;height:56px">' + [0.45,0.38,0.22].map(h => '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;height:100%"><div style="width:18px;border-radius:2px;margin-top:auto;height:' + h*100 + '%;background:#2a2a2a"></div><span style="font-size:8px;color:#a8a8a8">R</span></div>').join('') + '</div><span style="font-size:10px;color:#b0b0b0">约束衰减 ✗</span></div><div style="font-size:10px;color:#909090;font-weight:700;flex-shrink:0">VS</div><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px;border-radius:6px;border:1px solid rgba(184,168,138,.25);background:rgba(184,168,138,.03)"><span style="font-size:10px;color:#B8A88A;letter-spacing:.06em">有记忆机制</span><div style="display:flex;align-items:flex-end;gap:12px;height:56px">' + [0.45,0.72,0.94].map(h => '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;height:100%"><div style="width:18px;border-radius:2px;margin-top:auto;height:' + h*100 + '%;background:#B8A88A"></div><span style="font-size:8px;color:#B8A88A">R</span></div>').join('') + '</div><span style="font-size:10px;color:#B8A88A">约束全继承 ✓</span></div></div>' }
   ];
   document.getElementById('cutStages').innerHTML = stages.map((s, i) =>
     '<div class="cut-stage-card open" data-idx="' + i + '">' +
@@ -2215,6 +2427,314 @@ function renderCutStages() {
 function toggleCutStage(idx) {
   const card = document.querySelector('.cut-stage-card[data-idx="' + idx + '"]');
   if (card) card.classList.toggle('open');
+}
+
+// ═══════════ DISTRIBUTION FEEDBACK & PLATFORM MATRIX ═══════════
+let distMetersInited = false;
+let platformMatrixInited = false;
+let distEntered = false;
+
+function initDistributionMeter() {
+  if (distMetersInited) return;
+  distMetersInited = true;
+
+  // Build waveform bars
+  document.querySelectorAll('.dist-meter-wave').forEach(wave => {
+    for (let i = 0; i < 7; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'wf-bar';
+      bar.style.height = (6 + Math.random() * 14) + 'px';
+      bar.style.animationDelay = (i * 0.12) + 's';
+      wave.appendChild(bar);
+    }
+  });
+
+  // Hover pulse on meters
+  document.querySelectorAll('.dist-meter').forEach(meter => {
+    meter.addEventListener('mouseenter', () => {
+      spawnDotBurst(meter);
+      // Intensify waveform
+      meter.querySelectorAll('.wf-bar').forEach(b => {
+        b.style.height = (10 + Math.random() * 18) + 'px';
+      });
+    });
+    meter.addEventListener('mouseleave', () => {
+      meter.querySelectorAll('.wf-bar').forEach(b => {
+        b.style.height = (6 + Math.random() * 14) + 'px';
+      });
+    });
+  });
+
+  startDistWaveAnimation();
+}
+
+function startDistWaveAnimation() {
+  const waves = document.querySelectorAll('.dist-meter-wave');
+  function animate() {
+    waves.forEach(wave => {
+      wave.querySelectorAll('.wf-bar').forEach((bar, i) => {
+        const base = 6 + Math.sin(Date.now() * 0.004 + i * 0.7) * 8;
+        bar.style.height = Math.max(3, base + Math.random() * 4) + 'px';
+      });
+    });
+    if (document.getElementById('sec-cut').classList.contains('active')) {
+      requestAnimationFrame(() => setTimeout(animate, 200));
+    }
+  }
+  animate();
+}
+
+function initPlatformMatrix() {
+  if (platformMatrixInited) return;
+  platformMatrixInited = true;
+
+  const graph = document.getElementById('platformGraph');
+  const connectorsSvg = document.getElementById('platformConnectors');
+
+  // Position center node (it's in HTML already, positioned via CSS 50%/50%)
+
+  // Create platform nodes
+  PLATFORMS.forEach(p => {
+    const node = document.createElement('div');
+    node.className = 'platform-node';
+    node.setAttribute('data-platform', p.id);
+    node.style.left = p.id === 'rednote' || p.id === 'douyin' ? '74%' : '16%';
+    node.style.top = p.id === 'rednote' || p.id === 'bilibili' ? '22%' : '68%';
+    node.innerHTML = '<div class="platform-node-name">' + p.name + '</div>' +
+      '<div class="platform-node-cn">' + p.cn + '</div>' +
+      '<div class="platform-node-tags">' + p.tags.map(t => '<span class="platform-node-tag">' + t + '</span>').join('') + '</div>';
+
+    // Hover: highlight timeline clips
+    node.addEventListener('mouseenter', () => highlightPlatformClips(p.id, true));
+    node.addEventListener('mouseleave', () => highlightPlatformClips(p.id, false));
+
+    graph.appendChild(node);
+  });
+
+  // Draw connector lines after nodes are in DOM
+  setTimeout(drawConnectorLines, 100);
+
+  // Center node hover: pulse all connectors
+  const center = document.getElementById('platformCenter');
+  if (center) {
+    center.addEventListener('mouseenter', () => {
+      connectorsSvg.querySelectorAll('line').forEach(l => l.classList.add('active'));
+    });
+    center.addEventListener('mouseleave', () => {
+      connectorsSvg.querySelectorAll('line').forEach(l => l.classList.remove('active'));
+    });
+  }
+}
+
+function drawConnectorLines() {
+  const svg = document.getElementById('platformConnectors');
+  const graph = document.getElementById('platformGraph');
+  const center = document.getElementById('platformCenter');
+  if (!svg || !graph || !center) return;
+
+  const graphRect = graph.getBoundingClientRect();
+  const centerRect = center.getBoundingClientRect();
+  const cx = centerRect.left - graphRect.left + centerRect.width / 2;
+  const cy = centerRect.top - graphRect.top + centerRect.height / 2;
+
+  svg.setAttribute('viewBox', '0 0 ' + graphRect.width + ' ' + graphRect.height);
+  svg.style.width = graphRect.width + 'px';
+  svg.style.height = graphRect.height + 'px';
+
+  let html = '';
+  document.querySelectorAll('.platform-node').forEach(node => {
+    const nr = node.getBoundingClientRect();
+    const nx = nr.left - graphRect.left + nr.width / 2;
+    const ny = nr.top - graphRect.top + nr.height / 2;
+    const platform = node.getAttribute('data-platform');
+    const pData = PLATFORMS.find(p => p.id === platform);
+    const strokeColor = pData ? pData.accent : 'rgba(184,168,138,.2)';
+    html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + nx + '" y2="' + ny + '" stroke="' + strokeColor + '" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>';
+  });
+  svg.innerHTML = html;
+}
+
+function highlightPlatformClips(platformId, on) {
+  // Highlight a subset of timeline clips based on platform
+  const trackMap = {
+    rednote: ['video', 'text'],
+    douyin: ['video', 'audio'],
+    bilibili: ['semantic', 'text'],
+    channels: ['human', 'audio']
+  };
+  const tracks = trackMap[platformId] || [];
+  document.querySelectorAll('.cut-clip').forEach(clip => {
+    // Find parent track
+    const track = clip.closest('.cut-track');
+    if (!track) return;
+    const trackType = track.getAttribute('data-track');
+    if (tracks.includes(trackType)) {
+      if (on) clip.classList.add('highlight');
+      else clip.classList.remove('highlight');
+    }
+  });
+
+  // Also highlight connector line
+  const lines = document.querySelectorAll('#platformConnectors line');
+  const node = document.querySelector('.platform-node[data-platform="' + platformId + '"]');
+  if (node) {
+    const idx = Array.from(document.querySelectorAll('.platform-node')).indexOf(node);
+    if (lines[idx]) {
+      if (on) lines[idx].classList.add('active');
+      else lines[idx].classList.remove('active');
+    }
+  }
+}
+
+function spawnDotBurst(el) {
+  const rect = el.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  const container = document.createElement('div');
+  container.className = 'dist-dot-burst';
+  container.style.left = cx + 'px';
+  container.style.top = cy + 'px';
+  document.body.appendChild(container);
+
+  for (let i = 0; i < 14; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dist-dot-particle';
+    const angle = (Math.PI * 2 * i) / 14 + Math.random() * 0.3;
+    const dist = 20 + Math.random() * 30;
+    dot.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+    dot.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+    dot.style.animationDelay = (i * 0.03) + 's';
+    container.appendChild(dot);
+  }
+
+  setTimeout(() => container.remove(), 700);
+}
+
+function startCountUpAnimation(el, target, duration) {
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // easeOutExpo
+    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const current = Math.floor(eased * target);
+    el.textContent = current.toLocaleString();
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = target.toLocaleString();
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+function triggerClipFlySequence() {
+  if (distEntered) return;
+  distEntered = true;
+
+  // Clone timeline clips and fly them toward platforms
+  const clips = document.querySelectorAll('.cut-clip');
+  const platformNodes = document.querySelectorAll('.platform-node');
+
+  if (clips.length === 0 || platformNodes.length === 0) {
+    // Platforms not ready yet, just do count-up
+    triggerCountUp();
+    return;
+  }
+
+  const clipArray = Array.from(clips);
+  // Pick up to 8 clips to fly
+  const flyClips = clipArray.slice(0, Math.min(8, clipArray.length));
+
+  flyClips.forEach((clip, i) => {
+    const targetNode = platformNodes[i % platformNodes.length];
+    const clipRect = clip.getBoundingClientRect();
+    const targetRect = targetNode.getBoundingClientRect();
+
+    const flyEl = document.createElement('div');
+    flyEl.className = 'cut-clip-fly ' + (clip.classList.contains('video') ? 'video' :
+      clip.classList.contains('audio') ? 'audio' :
+      clip.classList.contains('text') ? 'text' :
+      clip.classList.contains('semantic') ? 'semantic' : 'human');
+    flyEl.style.left = clipRect.left + 'px';
+    flyEl.style.top = clipRect.top + 'px';
+    flyEl.style.width = clipRect.width + 'px';
+    flyEl.style.height = clipRect.height + 'px';
+    document.body.appendChild(flyEl);
+
+    requestAnimationFrame(() => {
+      flyEl.style.left = (targetRect.left + targetRect.width / 2 - clipRect.width / 2) + 'px';
+      flyEl.style.top = (targetRect.top + targetRect.height / 2 - clipRect.height / 2) + 'px';
+      flyEl.style.opacity = '0.3';
+      flyEl.style.transform = 'scale(0.6)';
+    });
+
+    setTimeout(() => flyEl.remove(), 800);
+  });
+
+  // After clip fly, trigger data return
+  setTimeout(() => {
+    triggerDataReturn();
+    triggerCountUp();
+  }, 900);
+}
+
+function triggerDataReturn() {
+  const platformNodes = document.querySelectorAll('.platform-node');
+  const meters = document.querySelectorAll('.dist-meter');
+
+  platformNodes.forEach((node, i) => {
+    const targetMeter = meters[i % meters.length];
+    const nodeRect = node.getBoundingClientRect();
+    const meterRect = targetMeter.getBoundingClientRect();
+
+    for (let j = 0; j < 3; j++) {
+      setTimeout(() => {
+        const dot = document.createElement('div');
+        dot.className = 'data-return-dot';
+        dot.style.left = (nodeRect.left + nodeRect.width / 2) + 'px';
+        dot.style.top = (nodeRect.top + nodeRect.height / 2) + 'px';
+        document.body.appendChild(dot);
+
+        requestAnimationFrame(() => {
+          dot.style.left = (meterRect.left + meterRect.width / 2) + 'px';
+          dot.style.top = (meterRect.top + meterRect.height / 2) + 'px';
+          dot.style.opacity = '0.8';
+        });
+
+        // Pulse ring on arrival
+        setTimeout(() => {
+          spawnPulseRing(targetMeter);
+          dot.remove();
+        }, 850);
+      }, j * 120);
+    }
+  });
+}
+
+function spawnPulseRing(el) {
+  const ring = document.createElement('div');
+  ring.className = 'dist-pulse-ring';
+  el.appendChild(ring);
+  setTimeout(() => ring.remove(), 750);
+}
+
+function triggerCountUp() {
+  DIST_METRICS.forEach(m => {
+    const el = document.getElementById('dv' + m.id.charAt(0).toUpperCase() + m.id.slice(1));
+    if (!el) return;
+    startCountUpAnimation(el, m.target, 1800);
+
+    // Animate ring fill
+    const ring = document.getElementById('ring' + m.id.charAt(0).toUpperCase() + m.id.slice(1));
+    if (ring) {
+      const circumference = 2 * Math.PI * 34; // ~213.6
+      setTimeout(() => {
+        ring.setAttribute('stroke-dasharray', circumference + ' ' + circumference);
+      }, 100);
+    }
+  });
 }
 
 // ═══════════ SIGNAL — Radar Station ═══════════
