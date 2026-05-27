@@ -19,8 +19,6 @@ python3 -m http.server 8080
 # 打开 http://localhost:8080/index.html
 ```
 
-需要同目录下放置 `3dphoto.png` 作为个人照片背景。
-
 ---
 
 ## 入口动画流程
@@ -151,6 +149,10 @@ python3 -m http.server 8080
 
 AI 人文剪辑台：3 个 AI 剪辑案例（深度访谈/新闻圆桌/播客对话），四层管线展开（感知层 → 认知层 → 行动层 → 反思层），反思层含记忆机制对比可视化。
 
+顶部新增项目展示卡片：
+
+- **悦来人文 Project Showcase**：品牌视觉宣传片项目展示，含项目封面图与标签（剪辑/调色/包装）
+
 底部新增两大模块：
 
 **Distribution Feedback（传播效果回流）**：
@@ -205,9 +207,11 @@ SoundEngine 类提供 5 种页面切换音效：
 ```
 INTERACT/
 ├── index.html       # 唯一源文件（HTML + CSS + JS）
-├── 3dphoto.png      # 个人照片背景（需自行放置）
+├── 3dphoto.png       # 个人照片背景
 ├── 国安资料/         # CINEMA 项目图片素材
 │   └── image.png    # MV 主视觉
+├── cut-悦来人文/     # CUT 剪辑项目图片素材
+│   └── image.png    # 悦来人文项目封面
 ├── choir/           # GROOVE 项目图片素材
 │   ├── page2_3.jpg
 │   ├── page2_5.jpg
