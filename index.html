@@ -1080,6 +1080,13 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
   </div>
 </div>
 
+<!-- Lightbox overlay -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <span class="lightbox-hint">点击空白处或按 ESC 关闭</span>
+</div>
+
 <script>
 // ═══════════ DATA ═══════════
 const SOUND_PHASES = [
@@ -2893,13 +2900,5 @@ initCut();
   });
 })();
 </script>
-
-<!-- Lightbox overlay -->
-<div class="lightbox-overlay" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">&times;</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  <span class="lightbox-hint">点击空白处或按 ESC 关闭</span>
-</div>
-
 </body>
 </html>
