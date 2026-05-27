@@ -600,12 +600,20 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .signal-knob-ticks{fill:none;stroke:#3a3a3a;stroke-width:1}
 .signal-knob-active-arc{fill:none;stroke:rgba(123,94,167,.3);stroke-width:2;transition:stroke .6s}
 .signal-knob-face{fill:#0d0d0d;stroke:#1a1a1a;stroke-width:1}
-.signal-knob-pointer{fill:#e8e8e8;transition:fill .4s}
+.signal-knob-pointer{stroke:#e8e8e8;stroke-width:2.5;stroke-linecap:round;transition:stroke .4s}
 .signal-knob-dot{fill:#7B5EA7;opacity:0;transition:opacity .5s}
 .signal-zone-label{font-size:11px;color:#505050;letter-spacing:.15em;text-align:center;min-height:18px;transition:color .4s}
 .signal-zone-label.lit{color:#7B5EA7}
 .signal-freq-text{font-size:9px;color:#383838;letter-spacing:.1em;margin-top:-12px}
-.signal-tuning-hint{font-size:9px;color:#383838;letter-spacing:.08em;text-align:center;margin-top:4px}
+.signal-tuning-hint{font-size:10px;color:#505050;letter-spacing:.1em;text-align:center;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .5s}
+.signal-tuning-hint.faded{opacity:0}
+.signal-hint-arrow{display:inline-block;animation:hintArrowSpin 2s ease-in-out infinite;font-size:12px;color:#7B5EA7}
+@keyframes hintArrowSpin{0%,100%{transform:rotate(0deg)}40%{transform:rotate(40deg)}80%{transform:rotate(-20deg)}}
+
+/* Idle hint: knob outer glow pulse */
+.signal-knob-wrap::before{content:'';position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(123,94,167,.08);animation:knobHintPulse 2.5s ease-in-out infinite;pointer-events:none}
+.signal-knob-wrap.interacted::before{animation:none;opacity:0;transition:opacity .6s}
+@keyframes knobHintPulse{0%,100%{border-color:rgba(123,94,167,.04);box-shadow:0 0 0 rgba(123,94,167,0)}50%{border-color:rgba(123,94,167,.15);box-shadow:0 0 14px rgba(123,94,167,.06)}}
 
 /* ─── Center: Spectrum Analyzer ─── */
 .signal-spectrum{display:flex;flex-direction:column;align-items:center;gap:16px}
@@ -1037,7 +1045,7 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
           </div>
           <span class="signal-zone-label" id="signalZoneLabel">NOISE ZONE</span>
           <span class="signal-freq-text" id="signalFreqText">0° · 静噪区</span>
-          <span class="signal-tuning-hint">旋转旋钮 · 调谐信号</span>
+          <span class="signal-tuning-hint" id="signalTuningHint"><span class="signal-hint-arrow">↻</span>旋转旋钮 · 调谐信号</span>
         </div>
 
         <!-- Center: Spectrum Analyzer -->
@@ -3102,14 +3110,25 @@ function initSignalPanel() {
   }
 
   // ─── Drag events ───
+  let interacted = false;
+  function onFirstInteract() {
+    if (interacted) return;
+    interacted = true;
+    knobWrap.classList.add('interacted');
+    const hint = document.getElementById('signalTuningHint');
+    if (hint) hint.classList.add('faded');
+  }
+
   knobWrap.addEventListener('mousedown', e => {
     dragging = true;
     knobWrap.classList.add('grabbing');
+    onFirstInteract();
     e.preventDefault();
   });
   knobWrap.addEventListener('touchstart', e => {
     dragging = true;
     knobWrap.classList.add('grabbing');
+    onFirstInteract();
   }, { passive:false });
 
   window.addEventListener('mousemove', e => {
