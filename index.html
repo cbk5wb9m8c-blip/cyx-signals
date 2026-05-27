@@ -552,7 +552,25 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
   .platform-node-name{font-size:9px}
   .platform-node-tag{font-size:7px;white-space:normal}
   .dist-signal-canvas{height:14px}
+  .cut-project-card{flex-direction:column;gap:14px;padding:14px}
+  .cut-project-img-wrap{width:100%}
 }
+
+
+/* ═══════════ CUT — Project Showcase ═══════════ */
+.cut-project-card{display:flex;gap:22px;margin-bottom:4px;padding:18px;background:rgba(255,255,255,.008);border:1px solid #1a1a1a;border-radius:8px;align-items:flex-start;transition:border-color .35s}
+.cut-project-card:hover{border-color:#252525}
+.cut-project-img-wrap{flex-shrink:0;width:360px;position:relative;border-radius:4px;overflow:hidden;border:1px solid #1c1c1c;transition:border-color .35s}
+.cut-project-card:hover .cut-project-img-wrap{border-color:rgba(184,168,138,.2)}
+.cut-project-img{display:block;width:100%;height:auto;filter:grayscale(.3) contrast(1.05) brightness(.88);transition:all .4s}
+.cut-project-card:hover .cut-project-img{filter:grayscale(0) contrast(1.08) brightness(.95)}
+.cut-project-img-tag{position:absolute;top:8px;left:8px;font-size:8px;color:rgba(255,255,255,.6);background:rgba(0,0,0,.6);backdrop-filter:blur(6px);padding:3px 8px;border-radius:2px;letter-spacing:.1em;pointer-events:none}
+.cut-project-info{flex:1;display:flex;flex-direction:column;gap:8px;padding-top:2px;min-width:0}
+.cut-project-label{font-size:9px;color:#B8A88A;letter-spacing:.18em}
+.cut-project-title{font-size:18px;font-weight:700;color:#e0e0e0;letter-spacing:.04em}
+.cut-project-sub{font-size:10px;color:#707070;letter-spacing:.06em;line-height:1.7}
+.cut-project-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.cut-project-tag{font-size:9px;color:rgba(184,168,138,.55);background:rgba(184,168,138,.04);border:1px solid rgba(184,168,138,.12);padding:3px 10px;border-radius:3px;letter-spacing:.04em}
 
 /* ═══════════ SIGNAL — Radar Station ═══════════ */
 #sec-signal{text-align:center}
@@ -861,6 +879,22 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
         <div class="cut-header-bar">
           <span class="cut-station-label">CUT :: AI 剪辑台</span>
           <div class="cut-scenario-tabs" id="cutTabs"></div>
+        </div>
+        <div class="cut-project-card">
+          <div class="cut-project-img-wrap">
+            <span class="cut-project-img-tag">PROJECT REF</span>
+            <img src="cut-悦来人文/image.png" class="cut-project-img" alt="悦来人文" loading="lazy">
+          </div>
+          <div class="cut-project-info">
+            <span class="cut-project-label">PROJECT SHOWCASE</span>
+            <span class="cut-project-title">悦来人文</span>
+            <span class="cut-project-sub">品牌视觉宣传片 · 剪辑与后期制作</span>
+            <div class="cut-project-tags">
+              <span class="cut-project-tag">剪辑</span>
+              <span class="cut-project-tag">调色</span>
+              <span class="cut-project-tag">包装</span>
+            </div>
+          </div>
         </div>
         <div class="cut-timeline" id="cutTimeline">
           <div class="cut-track" data-track="video">
