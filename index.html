@@ -585,36 +585,75 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 .cut-project-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
 .cut-project-tag{font-size:9px;color:rgba(184,168,138,.55);background:rgba(184,168,138,.04);border:1px solid rgba(184,168,138,.12);padding:3px 10px;border-radius:3px;letter-spacing:.04em}
 
-/* ═══════════ SIGNAL — Radar Station ═══════════ */
-#sec-signal{text-align:center}
-#sec-signal.active{display:flex;align-items:center;justify-content:center}
-.signal-station{display:flex;flex-direction:column;align-items:center;gap:32px;width:100%;max-width:600px;padding:40px 20px}
-.signal-radar-scope{position:relative;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(94,167,200,.03) 0%,rgba(8,8,8,.8) 70%);border:1px solid rgba(94,167,200,.15);overflow:hidden}
-.signal-radar-canvas{position:absolute;inset:0;width:100%;height:100%}
-.signal-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(94,167,200,.06) 0deg,transparent 30deg);animation:radarSweep 3s linear infinite}
-@keyframes radarSweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.signal-grid{position:absolute;inset:10%;border-radius:50%;border:1px solid rgba(94,167,200,.06)}
-.signal-grid::before{content:'';position:absolute;inset:25%;border-radius:50%;border:1px solid rgba(94,167,200,.04)}
-.signal-grid::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(94,167,200,.04)}
-.signal-ping{position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(94,167,200,.2);transform:translate(-50%,-50%);pointer-events:none}
-.signal-ping.active{animation:pingOut .8s ease-out forwards}
-@keyframes pingOut{0%{width:4px;height:4px;opacity:.8}100%{width:160px;height:160px;opacity:0}}
-.signal-point{position:absolute;transform:translate(-50%,-50%);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2}
-.signal-point-dot{width:6px;height:6px;border-radius:50%;background:rgba(94,167,200,.5);box-shadow:0 0 8px rgba(94,167,200,.3);transition:all .35s}
-.signal-point:hover .signal-point-dot{background:rgba(94,167,200,.9);box-shadow:0 0 16px rgba(94,167,200,.6);transform:scale(1.5)}
-.signal-point-label{font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.12em;transition:color .35s}
-.signal-point:hover .signal-point-label{color:rgba(94,167,200,.7)}
-.signal-point-value{font-size:11px;color:transparent;letter-spacing:.04em;opacity:0;transform:translateY(-4px);transition:all .35s;position:absolute;top:-28px;white-space:nowrap;background:rgba(8,8,8,.85);padding:4px 10px;border-radius:3px;border:1px solid rgba(94,167,200,.15)}
-.signal-point:hover .signal-point-value{color:rgba(255,255,255,.7);opacity:1;transform:translateY(0)}
-.signal-center-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:16px;color:rgba(255,255,255,.5);font-weight:700;letter-spacing:.05em;z-index:1;text-shadow:0 0 20px rgba(94,167,200,.2)}
-.signal-meta{display:flex;flex-direction:column;gap:10px;align-items:center}
-.signal-meta-row{display:flex;align-items:center;gap:8px;font-size:12px}
-.signal-meta-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
-.signal-meta-label{color:#606060;letter-spacing:.12em;font-size:10px}
-.signal-meta-value{color:#a0a0a0;letter-spacing:.04em}
-.signal-meta-value.accent{color:var(--accent)}
-.signal-whisper{font-size:12px;color:#606060;transition:color 2s}
-.signal-whisper:hover{color:var(--dim)}
+/* ═══════════ SIGNAL — Interactive Radio Tuning Panel ═══════════ */
+#sec-signal.active{display:flex;align-items:center;justify-content:center;background:#080808}
+.signal-panel{display:grid;grid-template-columns:280px 1fr 320px;gap:40px;width:100%;max-width:1200px;padding:40px 36px;align-items:center;position:relative}
+.signal-panel::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 35% 50%,rgba(123,94,167,.015) 0%,transparent 50%),radial-gradient(ellipse at 65% 50%,rgba(123,94,167,.01) 0%,transparent 50%);pointer-events:none}
+
+/* ─── Left: Tuning Knob ─── */
+.signal-tuning{display:flex;flex-direction:column;align-items:center;gap:20px}
+.signal-knob-wrap{position:relative;width:200px;height:200px;cursor:grab;user-select:none;-webkit-user-select:none}
+.signal-knob-wrap:active{cursor:grabbing}
+.signal-knob-wrap.grabbing{cursor:grabbing}
+.signal-knob-svg{width:100%;height:100%}
+.signal-knob-ring{fill:none;stroke:#2a2a2a;stroke-width:2}
+.signal-knob-ticks{fill:none;stroke:#3a3a3a;stroke-width:1}
+.signal-knob-active-arc{fill:none;stroke:rgba(123,94,167,.3);stroke-width:2;transition:stroke .6s}
+.signal-knob-face{fill:#0d0d0d;stroke:#1a1a1a;stroke-width:1}
+.signal-knob-pointer{fill:#e8e8e8;transition:fill .4s}
+.signal-knob-dot{fill:#7B5EA7;opacity:0;transition:opacity .5s}
+.signal-zone-label{font-size:11px;color:#505050;letter-spacing:.15em;text-align:center;min-height:18px;transition:color .4s}
+.signal-zone-label.lit{color:#7B5EA7}
+.signal-freq-text{font-size:9px;color:#383838;letter-spacing:.1em;margin-top:-12px}
+.signal-tuning-hint{font-size:9px;color:#383838;letter-spacing:.08em;text-align:center;margin-top:4px}
+
+/* ─── Center: Spectrum Analyzer ─── */
+.signal-spectrum{display:flex;flex-direction:column;align-items:center;gap:16px}
+.signal-spectrum-canvas{width:100%;height:200px;display:block}
+.signal-spectrum-label{font-size:11px;color:#606060;letter-spacing:.1em;text-align:center;min-height:16px;transition:color .5s}
+.signal-spectrum-label.locked{color:#7B5EA7}
+
+/* ─── Right: Archive Panel ─── */
+.signal-archive{display:flex;flex-direction:column;gap:3px;background:rgba(255,255,255,.008);border:1px solid #141414;border-radius:8px;padding:24px 22px}
+.signal-archive-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #101010;position:relative;min-height:48px}
+.signal-archive-row:last-child{border-bottom:none}
+.signal-archive-label{font-size:9px;color:#484848;letter-spacing:.12em;width:64px;flex-shrink:0}
+.signal-archive-value{font-size:12px;color:#909090;letter-spacing:.04em;position:relative;transition:color .4s,text-shadow .4s}
+.signal-archive-value.lit{color:#c0b0d8;text-shadow:0 0 8px rgba(123,94,167,.2)}
+.signal-archive-value.clickable{cursor:pointer;transition:color .2s}
+.signal-archive-value.clickable:hover{color:#d0c0e8}
+.signal-archive-censor{position:absolute;inset:0;background:#1c1c1c;border-radius:2px;transition:opacity .3s,width .4s ease;pointer-events:none}
+.signal-archive-censor.reveal{opacity:0;width:0}
+.signal-archive-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#7B5EA7;margin-right:4px;opacity:0;transition:opacity .3s}
+.signal-archive-dot.lit{opacity:1;animation:archivePulse 2s infinite}
+@keyframes archivePulse{0%,100%{box-shadow:0 0 4px rgba(123,94,167,.3)}50%{box-shadow:0 0 10px rgba(123,94,167,.7)}}
+.signal-copy-toast{position:absolute;right:0;top:-20px;font-size:9px;color:#7B5EA7;letter-spacing:.08em;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.signal-copy-toast.show{opacity:1}
+
+/* ─── Antenna (top-right) ─── */
+.signal-antenna{position:absolute;top:-12px;right:20px;width:3px;height:50px;background:linear-gradient(to bottom,#181818,#0a0a0a);border-radius:1px;transform:rotate(8deg);transform-origin:bottom center}
+.signal-antenna::after{content:'';position:absolute;top:-4px;left:-3px;width:9px;height:9px;border-radius:50%;background:#181818;transition:background .5s,box-shadow .5s}
+.signal-antenna.on::after{background:#7B5EA7;box-shadow:0 0 8px rgba(123,94,167,.6),0 0 20px rgba(123,94,167,.2);animation:antennaBlink 2s infinite}
+@keyframes antennaBlink{0%,90%,100%{opacity:1}95%{opacity:.3}}
+
+/* ─── City outline SVG ─── */
+.signal-city-outline{position:absolute;bottom:80px;left:60px;opacity:0;transition:opacity .8s;pointer-events:none}
+.signal-city-outline.visible{opacity:.12}
+.signal-city-outline svg{width:160px;height:100px}
+
+/* ─── Easter egg ─── */
+.signal-easteregg{font-size:12px;color:#1c1c1c;text-align:center;letter-spacing:.06em;transition:color .8s;margin-top:4px;pointer-events:none;position:absolute;bottom:20px;left:0;right:0}
+.signal-easteregg.revealed{color:#2a2a2a}
+
+/* Responsive */
+@media(max-width:768px){
+  .signal-panel{grid-template-columns:1fr;gap:24px;padding:20px 16px;max-width:100%}
+  .signal-knob-wrap{width:150px;height:150px}
+  .signal-spectrum-canvas{height:120px}
+  .signal-archive{padding:16px 14px}
+  .signal-antenna{right:8px;top:-8px;height:36px}
+  .signal-city-outline{display:none}
+}
 
 .cinema-section-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
 .cinema-section-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(15,168,158,.02) 0%,transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(10,140,130,.015) 0%,transparent 50%)}
@@ -654,7 +693,12 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
   .cut-track-label{width:60px;font-size:7px}
   .cut-stage-head{flex-wrap:wrap;gap:10px}
   .cut-stage-meta{flex-wrap:wrap;gap:8px}
-  .signal-radar-scope{width:220px;height:220px}
+  .signal-panel{grid-template-columns:1fr;gap:24px;padding:20px 16px}
+  .signal-knob-wrap{width:150px;height:150px}
+  .signal-spectrum-canvas{height:120px}
+  .signal-archive{padding:16px 14px}
+  .signal-antenna{right:8px;top:-8px;height:36px}
+  .signal-city-outline{display:none}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
@@ -976,43 +1020,87 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
       </div>
     </section>
 
-    <!-- SIGNAL -->
+    <!-- SIGNAL — Interactive Radio Tuning Panel -->
     <section class="section" id="sec-signal">
-      <div class="signal-station">
-        <div class="signal-radar-scope" id="signalRadar">
-          <canvas class="signal-radar-canvas" id="signalRadarCanvas"></canvas>
-          <div class="signal-sweep"></div>
-          <div class="signal-grid"></div>
-          <div class="signal-ping" id="signalPing"></div>
-          <div class="signal-point" id="spEmail" data-type="email" style="top:28%;left:62%">
-            <span class="signal-point-dot"></span>
-            <span class="signal-point-label">EMAIL</span>
-            <span class="signal-point-value">xiaoxuannixingfuma@163.com</span>
+      <div class="signal-panel">
+        <!-- Left: Tuning Knob -->
+        <div class="signal-tuning">
+          <div class="signal-knob-wrap" id="signalKnobWrap">
+            <svg class="signal-knob-svg" id="signalKnobSvg" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="92" class="signal-knob-ring"/>
+              <g id="signalKnobTicks"></g>
+              <circle cx="100" cy="100" r="80" class="signal-knob-face"/>
+              <path class="signal-knob-active-arc" id="signalKnobArc" d=""/>
+              <line x1="100" y1="100" x2="100" y2="28" stroke="#e8e8e8" stroke-width="2.5" stroke-linecap="round" id="signalKnobPointer"/>
+              <circle cx="100" cy="100" r="4" class="signal-knob-dot" id="signalKnobDot"/>
+            </svg>
           </div>
-          <div class="signal-point" id="spPhone" data-type="phone" style="top:55%;left:28%">
-            <span class="signal-point-dot"></span>
-            <span class="signal-point-label">PHONE</span>
-            <span class="signal-point-value">191-1892-9672</span>
-          </div>
-          <div class="signal-point" id="spLocation" data-type="location" style="top:65%;left:68%">
-            <span class="signal-point-dot"></span>
-            <span class="signal-point-label">LOCATION</span>
-            <span class="signal-point-value">天津 · 南开大学</span>
-          </div>
-          <div class="signal-center-badge">曹语轩</div>
+          <span class="signal-zone-label" id="signalZoneLabel">NOISE ZONE</span>
+          <span class="signal-freq-text" id="signalFreqText">0° · 静噪区</span>
+          <span class="signal-tuning-hint">旋转旋钮 · 调谐信号</span>
         </div>
-        <div class="signal-meta">
-          <div class="signal-meta-row">
-            <span class="signal-meta-dot"></span>
-            <span class="signal-meta-label">SIGNAL STATUS</span>
-            <span class="signal-meta-value accent">OPEN</span>
+
+        <!-- Center: Spectrum Analyzer -->
+        <div class="signal-spectrum">
+          <canvas class="signal-spectrum-canvas" id="signalSpectrumCanvas"></canvas>
+          <span class="signal-spectrum-label" id="signalSpectrumLabel">SEARCHING SIGNAL...</span>
+        </div>
+
+        <!-- Right: Archive Panel -->
+        <div class="signal-archive" id="signalArchive">
+          <div class="signal-archive-row" data-unlock="90">
+            <span class="signal-archive-label">LOCATION</span>
+            <span class="signal-archive-value" id="sigValLocation">
+              <span class="signal-archive-censor"></span>天津 · 南开大学
+            </span>
           </div>
-          <div class="signal-meta-row">
-            <span class="signal-meta-label">LOOKING FOR</span>
-            <span class="signal-meta-value">AI Video Product · Content Tech · Creative Tooling</span>
+          <div class="signal-archive-row" data-unlock="180">
+            <span class="signal-archive-label">EMAIL</span>
+            <span class="signal-archive-value clickable" id="sigValEmail">
+              <span class="signal-archive-censor"></span>
+              <span class="signal-copy-toast" id="sigCopyToast">SIGNAL COPIED</span>
+              xiaoxuannixingfuma@163.com
+            </span>
+          </div>
+          <div class="signal-archive-row" data-unlock="270">
+            <span class="signal-archive-label">PHONE</span>
+            <span class="signal-archive-value" id="sigValPhone">
+              <span class="signal-archive-censor"></span>19118929672
+            </span>
+          </div>
+          <div class="signal-archive-row" data-unlock="360">
+            <span class="signal-archive-label">STATUS</span>
+            <span class="signal-archive-value" id="sigValStatus">
+              <span class="signal-archive-censor"></span>
+              <span class="signal-archive-dot"></span>OPEN · 可实习六个月
+            </span>
+          </div>
+          <div class="signal-archive-row" data-unlock="360">
+            <span class="signal-archive-label">ROLE</span>
+            <span class="signal-archive-value" id="sigValRole">
+              <span class="signal-archive-censor"></span>音视频模型数据策略产品岗
+            </span>
           </div>
         </div>
-        <p class="signal-whisper">声音从这里出发，在某处等待共鸣。</p>
+
+        <!-- Antenna -->
+        <div class="signal-antenna" id="signalAntenna"></div>
+
+        <!-- City outline -->
+        <div class="signal-city-outline" id="signalCityOutline">
+          <svg viewBox="0 0 160 100" fill="none">
+            <rect x="50" y="30" width="30" height="25" stroke="#1c1c1c" stroke-width=".6"/>
+            <rect x="55" y="10" width="20" height="20" stroke="#1c1c1c" stroke-width=".6"/>
+            <rect x="58" y="55" width="14" height="30" stroke="#1c1c1c" stroke-width=".6"/>
+            <rect x="80" y="50" width="22" height="40" stroke="#1c1c1c" stroke-width=".6"/>
+            <rect x="102" y="35" width="18" height="55" stroke="#1c1c1c" stroke-width=".6"/>
+            <path d="M20 85 L50 30 L60 55 L80 50 L102 35 L120 60 L140 45" stroke="#1c1c1c" stroke-width=".4" fill="none"/>
+            <circle cx="80" cy="50" r="2" fill="#1c1c1c" opacity=".3"/>
+          </svg>
+        </div>
+
+        <!-- Easter egg -->
+        <p class="signal-easteregg" id="signalEasterEgg">声音从这里出发，在某处等待共鸣。</p>
       </div>
     </section>
   </main>
@@ -2297,7 +2385,7 @@ function navigateTo(target) {
   window.scrollTo(0, 0);
 
   // Init page-specific features
-  if (target === 'signal') initSignalRadar();
+  if (target === 'signal') initSignalPanel();
   if (target === 'cut') { renderCutTimeline(); setTimeout(() => triggerClipFlySequence(), 400); }
   if (target !== 'cut') distEntered = false;
 }
@@ -2791,68 +2879,321 @@ function triggerCountUp() {
   });
 }
 
-// ═══════════ SIGNAL — Radar Station ═══════════
-let signalRadarActive = false;
-let signalRadarAnim = null;
+// ═══════════ SIGNAL — Interactive Radio Tuning Panel ═══════════
+let signalActive = false;
+let signalKnobAngle = 0;        // 0-360 degrees (0=top, clockwise)
+let signalPrevUnlocked = -1;    // previous unlocked zone (0/1/2/3/4)
+let signalNoiseCtx = null;
+let signalNoiseGain = null;
+let signalNoiseNode = null;
+let signalSpectrumAnim = null;
 
-function initSignalRadar() {
-  if (signalRadarActive) return;
-  const canvas = document.getElementById('signalRadarCanvas');
-  if (!canvas) return;
-  const scope = document.getElementById('signalRadar');
-  const rect = scope.getBoundingClientRect();
-  canvas.width = rect.width;
-  canvas.height = rect.height;
-  const ctx = canvas.getContext('2d');
-  const cx = rect.width / 2;
-  const cy = rect.height / 2;
-  const r = rect.width / 2 - 2;
-  signalRadarActive = true;
+const SIGNAL_ZONES = [
+  { angle:0,   label:'NOISE ZONE',      freq:'0° · 静噪区',      unlock:false },
+  { angle:90,  label:'LOCATION LOCKED',  freq:'90° · 位置锁定',    unlock:true },
+  { angle:180, label:'EMAIL CHANNEL',    freq:'180° · 频道开放',   unlock:true },
+  { angle:270, label:'VOICE CHANNEL',    freq:'270° · 语音通道',   unlock:true },
+  { angle:360, label:'SIGNAL ROOM OPEN', freq:'360° · 全频段解锁', unlock:true },
+];
 
-  let angle = 0;
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Draw concentric circles
-    for (let i = 1; i <= 3; i++) {
-      ctx.beginPath();
-      ctx.arc(cx, cy, r * i / 3, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(94,167,200,' + (0.04 / i) + ')';
-      ctx.stroke();
-    }
-    // Draw crosshair
-    ctx.beginPath();
-    ctx.moveTo(cx - r, cy); ctx.lineTo(cx + r, cy);
-    ctx.moveTo(cx, cy - r); ctx.lineTo(cx, cy + r);
-    ctx.strokeStyle = 'rgba(94,167,200,0.03)';
-    ctx.stroke();
-    // Draw sweep line
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
-    ctx.strokeStyle = 'rgba(94,167,200,0.25)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.lineWidth = 1;
-    // Sweep arc
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, angle - 0.3, angle);
-    ctx.strokeStyle = 'rgba(94,167,200,0.15)';
-    ctx.stroke();
-    angle += 0.015;
-    signalRadarAnim = requestAnimationFrame(draw);
+function initSignalPanel() {
+  if (signalActive) return;
+  signalActive = true;
+
+  const knobWrap = document.getElementById('signalKnobWrap');
+  const spectrumCanvas = document.getElementById('signalSpectrumCanvas');
+  if (!knobWrap || !spectrumCanvas) return;
+
+  // Build knob ticks
+  const ticksGroup = document.getElementById('signalKnobTicks');
+  for (let i = 0; i < 72; i++) {
+    const a = (i / 72) * Math.PI * 2 - Math.PI / 2;
+    const inner = i % 18 === 0 ? 76 : i % 6 === 0 ? 80 : 84;
+    const x1 = 100 + Math.cos(a) * inner;
+    const y1 = 100 + Math.sin(a) * inner;
+    const x2 = 100 + Math.cos(a) * 90;
+    const y2 = 100 + Math.sin(a) * 90;
+    const el = document.createElementNS('http://www.w3.org/2000/svg','line');
+    el.setAttribute('x1',x1); el.setAttribute('y1',y1);
+    el.setAttribute('x2',x2); el.setAttribute('y2',y2);
+    el.setAttribute('stroke', i % 18 === 0 ? '#4a4a4a' : '#2a2a2a');
+    el.setAttribute('stroke-width', i % 18 === 0 ? '1.5' : '0.6');
+    ticksGroup.appendChild(el);
   }
-  draw();
 
-  // Signal point hover interaction
-  document.querySelectorAll('.signal-point').forEach(point => {
-    point.addEventListener('click', () => {
-      const type = point.getAttribute('data-type');
-      if (type === 'email') {
-        const ping = document.getElementById('signalPing');
-        if (ping) { ping.classList.remove('active'); void ping.offsetWidth; ping.classList.add('active'); }
+  // Resize spectrum canvas
+  function resizeSpectrum() {
+    const rect = spectrumCanvas.getBoundingClientRect();
+    spectrumCanvas.width = rect.width * devicePixelRatio;
+    spectrumCanvas.height = 200 * devicePixelRatio;
+    spectrumCanvas.style.width = rect.width + 'px';
+    spectrumCanvas.style.height = '200px';
+  }
+  resizeSpectrum();
+  window.addEventListener('resize', resizeSpectrum);
+
+  // ─── Knob drag ───
+  let dragging = false;
+  let dragCenter = { x:0, y:0 };
+
+  function getAngle(e) {
+    const rect = knobWrap.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return Math.atan2(clientX - cx, -(clientY - cy)); // 0=top, clockwise+
+  }
+
+  function angleToDeg(a) {
+    let d = a * 180 / Math.PI;
+    if (d < 0) d += 360;
+    return d;
+  }
+
+  function updateKnobVisual(deg) {
+    const pointer = document.getElementById('signalKnobPointer');
+    const arc = document.getElementById('signalKnobArc');
+    const dot = document.getElementById('signalKnobDot');
+    const rad = deg * Math.PI / 180;
+    const tipX = 100 + Math.sin(rad) * 72;
+    const tipY = 100 - Math.cos(rad) * 72;
+    pointer.setAttribute('x2', tipX);
+    pointer.setAttribute('y2', tipY);
+
+    // Active arc from 0 to current
+    const startRad = -Math.PI / 2;
+    const endRad = startRad + rad * Math.PI / 180;
+    const large = deg > 180 ? 1 : 0;
+    const sx = 100 + Math.cos(startRad) * 88;
+    const sy = 100 + Math.sin(startRad) * 88;
+    const ex = 100 + Math.cos(endRad) * 88;
+    const ey = 100 + Math.sin(endRad) * 88;
+    arc.setAttribute('d', 'M ' + sx + ' ' + sy + ' A 88 88 0 ' + large + ' 1 ' + ex + ' ' + ey);
+    arc.setAttribute('stroke', deg >= 355 ? 'rgba(123,94,167,.6)' : 'rgba(123,94,167,.25)');
+
+    // Center dot glows at full
+    dot.setAttribute('opacity', deg >= 355 ? '1' : '0');
+  }
+
+  function updateZoneUI(deg) {
+    const zoneLabel = document.getElementById('signalZoneLabel');
+    const freqText = document.getElementById('signalFreqText');
+    const antenna = document.getElementById('signalAntenna');
+
+    let zoneIdx = 0;
+    for (let i = SIGNAL_ZONES.length - 1; i >= 0; i--) {
+      if (deg >= SIGNAL_ZONES[i].angle - 5) { zoneIdx = i; break; }
+    }
+    const zone = SIGNAL_ZONES[zoneIdx];
+
+    zoneLabel.textContent = zone.label;
+    zoneLabel.classList.toggle('lit', zoneIdx > 0);
+    freqText.textContent = zone.freq;
+
+    // Antenna ON at full signal
+    antenna.classList.toggle('on', deg >= 355);
+
+    // City outline visible at LOCATION+
+    const cityOutline = document.getElementById('signalCityOutline');
+    cityOutline.classList.toggle('visible', deg >= 85 && deg < 170);
+
+    // Easter egg at full
+    const egg = document.getElementById('signalEasterEgg');
+    egg.classList.toggle('revealed', deg >= 355);
+
+    return zoneIdx;
+  }
+
+  function updateArchive(deg) {
+    const rows = document.querySelectorAll('.signal-archive-row');
+    rows.forEach(row => {
+      const threshold = parseInt(row.getAttribute('data-unlock'));
+      const censor = row.querySelector('.signal-archive-censor');
+      const value = row.querySelector('.signal-archive-value');
+      const dot = row.querySelector('.signal-archive-dot');
+      if (deg >= threshold - 5 && censor) {
+        censor.classList.add('reveal');
+        if (value) value.classList.add('lit');
+        if (dot) dot.classList.add('lit');
+      } else if (censor) {
+        censor.classList.remove('reveal');
+        if (value) value.classList.remove('lit');
+        if (dot) dot.classList.remove('lit');
       }
     });
+  }
+
+  function updateSpectrum(deg) {
+    const canvas = spectrumCanvas;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    const N = 96;
+    const barW = (W / N) * 0.7;
+    const gap = (W / N) * 0.3;
+    const nearSignal = deg > 45; // above noise zone
+
+    for (let i = 0; i < N; i++) {
+      let h;
+      const pos = i / N; // 0..1 across spectrum
+
+      if (!nearSignal) {
+        // Noise zone: random low jitter
+        h = (Math.random() * 0.2 + Math.sin(Date.now() / 200 + i * 0.4) * 0.08) * H;
+      } else {
+        // Build up signal peaks as angle increases
+        const clarity = Math.min(1, (deg - 45) / 310); // 0 at 45°, 1 at 355°
+        // Create peaks around certain positions
+        const peak1 = Math.exp(-Math.pow((pos - 0.25) / (0.06 + (1 - clarity) * 0.2), 2));
+        const peak2 = Math.exp(-Math.pow((pos - 0.55) / (0.05 + (1 - clarity) * 0.18), 2));
+        const peak3 = Math.exp(-Math.pow((pos - 0.8) / (0.07 + (1 - clarity) * 0.22), 2));
+        const signal = (peak1 * 0.7 + peak2 * 0.9 + peak3 * 0.5) * clarity;
+        const noise = (1 - clarity) * (Math.random() * 0.15 + Math.sin(Date.now() / 180 + i * 0.35) * 0.06);
+        h = (signal + noise) * H * 1.1;
+        h = Math.max(2, Math.min(H * 0.95, h));
+      }
+
+      const x = i * (barW + gap);
+      const y = H - h;
+
+      // Color: gray → purple as signal locks
+      const r = Math.round(28 + (123 - 28) * (nearSignal ? Math.min(1, (deg - 45) / 310) : 0));
+      const g = Math.round(28 + (94 - 28) * (nearSignal ? Math.min(1, (deg - 45) / 310) : 0));
+      const b = Math.round(28 + (167 - 28) * (nearSignal ? Math.min(1, (deg - 45) / 310) : 0));
+      const alpha = nearSignal ? 0.35 + Math.min(1, (deg - 45) / 310) * 0.65 : 0.2;
+      ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+      ctx.beginPath();
+      ctx.roundRect(x, y, barW, h, [1]);
+      ctx.fill();
+    }
+
+    // Spectrum label
+    const label = document.getElementById('signalSpectrumLabel');
+    if (deg >= 355) {
+      label.textContent = 'SIGNAL LOCKED · CAO YUXUAN';
+      label.classList.add('locked');
+    } else {
+      label.textContent = 'SEARCHING SIGNAL...';
+      label.classList.remove('locked');
+    }
+  }
+
+  function startSpectrumLoop() {
+    function loop() {
+      updateSpectrum(signalKnobAngle);
+      signalSpectrumAnim = requestAnimationFrame(loop);
+    }
+    loop();
+  }
+
+  function updateAll(deg) {
+    signalKnobAngle = deg;
+    updateKnobVisual(deg);
+    const zoneIdx = updateZoneUI(deg);
+    const unlockIdx = deg >= 85 ? (deg >= 175 ? (deg >= 265 ? (deg >= 355 ? 4 : 3) : 2) : 1) : 0;
+    if (unlockIdx !== signalPrevUnlocked) {
+      signalPrevUnlocked = unlockIdx;
+      updateArchive(deg);
+    }
+    updateTuningNoise(deg);
+  }
+
+  // ─── Drag events ───
+  knobWrap.addEventListener('mousedown', e => {
+    dragging = true;
+    knobWrap.classList.add('grabbing');
+    e.preventDefault();
   });
+  knobWrap.addEventListener('touchstart', e => {
+    dragging = true;
+    knobWrap.classList.add('grabbing');
+  }, { passive:false });
+
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const deg = angleToDeg(getAngle(e));
+    updateAll(deg);
+  });
+  window.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const deg = angleToDeg(getAngle(e));
+    updateAll(deg);
+  }, { passive:false });
+
+  window.addEventListener('mouseup', () => {
+    dragging = false;
+    knobWrap.classList.remove('grabbing');
+  });
+  window.addEventListener('touchend', () => {
+    dragging = false;
+    knobWrap.classList.remove('grabbing');
+  });
+
+  // ─── Tuning noise (Web Audio) ───
+  function initTuningNoise() {
+    try {
+      signalNoiseCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const bufferSize = 2 * signalNoiseCtx.sampleRate;
+      const buffer = signalNoiseCtx.createBuffer(1, bufferSize, signalNoiseCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+      signalNoiseNode = signalNoiseCtx.createBufferSource();
+      signalNoiseNode.buffer = buffer;
+      signalNoiseNode.loop = true;
+      const bandpass = signalNoiseCtx.createBiquadFilter();
+      bandpass.type = 'bandpass';
+      bandpass.frequency.value = 1200;
+      bandpass.Q.value = 0.5;
+      signalNoiseGain = signalNoiseCtx.createGain();
+      signalNoiseGain.gain.value = 0.06;
+      signalNoiseNode.connect(bandpass);
+      bandpass.connect(signalNoiseGain);
+      signalNoiseGain.connect(signalNoiseCtx.destination);
+    } catch(e) { /* audio not available */ }
+  }
+
+  function updateTuningNoise(deg) {
+    if (!signalNoiseGain || !signalNoiseCtx) return;
+    if (signalNoiseCtx.state === 'suspended') signalNoiseCtx.resume();
+    // Noise loudest at noise zone, fades as signal locks
+    const noiseVol = deg < 45 ? 0.06 : Math.max(0, 0.06 * (1 - (deg - 45) / 310));
+    signalNoiseGain.gain.setTargetAtTime(noiseVol, signalNoiseCtx.currentTime, 0.1);
+    // Start noise on first interaction
+    if (signalNoiseNode && signalNoiseNode.start && !signalNoiseNode._started) {
+      signalNoiseNode._started = true;
+    }
+  }
+
+  // Start noise on first drag
+  function startNoise() {
+    if (!signalNoiseNode) { initTuningNoise(); }
+    if (signalNoiseNode && !signalNoiseNode._started) {
+      try { signalNoiseNode.start(0); signalNoiseNode._started = true; } catch(e) {}
+    }
+  }
+  knobWrap.addEventListener('mousedown', startNoise, { once:false });
+  knobWrap.addEventListener('touchstart', startNoise, { once:false });
+
+  // ─── Email copy ───
+  const emailVal = document.getElementById('sigValEmail');
+  const copyToast = document.getElementById('sigCopyToast');
+  if (emailVal) {
+    emailVal.addEventListener('click', () => {
+      if (signalKnobAngle < 175) return;
+      navigator.clipboard.writeText('xiaoxuannixingfuma@163.com').then(() => {
+        copyToast.classList.add('show');
+        setTimeout(() => copyToast.classList.remove('show'), 1800);
+      }).catch(() => {});
+    });
+  }
+
+  // ─── Initialize ───
+  updateAll(0);
+  updateArchive(0);
+  startSpectrumLoop();
 }
 
 // ═══════════ INIT ═══════════
