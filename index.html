@@ -540,6 +540,19 @@ main{position:relative;z-index:1;height:100%;overflow-y:auto;overflow-x:hidden;p
 /* Timeline clip highlight for platform hover */
 .cut-clip.highlight{opacity:1!important;box-shadow:0 0 10px rgba(184,168,138,.4)}
 
+/* ═══════════ LIGHTBOX — Image Zoom ═══════════ */
+.lightbox-overlay{position:fixed;inset:0;z-index:9998;background:rgba(4,4,4,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.lightbox-overlay.open{opacity:1;pointer-events:auto}
+.lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px;transform:scale(.92);transition:transform .35s cubic-bezier(.25,.8,.25,1);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox-overlay.open .lightbox-img{transform:scale(1)}
+.lightbox-close{position:absolute;top:24px;right:28px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:none;background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:20px;cursor:pointer;border-radius:50%;transition:all .25s;font-family:inherit}
+.lightbox-close:hover{background:rgba(255,255,255,.1);color:#fff}
+.lightbox-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.08em;pointer-events:none;transition:opacity .6s}
+.lightbox-overlay.open .lightbox-hint{opacity:0}
+
+/* Clickable image cursor */
+.cinema-monitor-img,.cut-project-img,.ep-journal-img{cursor:zoom-in}
+
 /* Responsive */
 @media(max-width:768px){
   .cut-distribution-row{grid-template-columns:1fr;gap:18px}
@@ -2840,6 +2853,53 @@ initSpectrumNav();
 initCinema();
 initPlaylist();
 initCut();
+
+// ═══════════ LIGHTBOX ═══════════
+(function(){
+  const overlay = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  const closeBtn = document.getElementById('lightboxClose');
+
+  function open(src) {
+    img.src = src;
+    overlay.classList.add('open');
+  }
+
+  function close() {
+    overlay.classList.remove('open');
+    setTimeout(() => { img.src = ''; }, 300);
+  }
+
+  // Click on any image in cinema/cut/groove sections
+  document.querySelectorAll('.cinema-monitor-img, .cut-project-img, .ep-journal-img').forEach(el => {
+    el.addEventListener('click', () => {
+      if (el.src) open(el.src);
+    });
+  });
+
+  // Also handle dynamically added groove images via event delegation
+  document.getElementById('sec-groove').addEventListener('click', e => {
+    if (e.target.classList.contains('ep-journal-img') && e.target.src) {
+      open(e.target.src);
+    }
+  });
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) close();
+  });
+  closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+})();
 </script>
+
+<!-- Lightbox overlay -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <span class="lightbox-hint">点击空白处或按 ESC 关闭</span>
+</div>
+
 </body>
 </html>
