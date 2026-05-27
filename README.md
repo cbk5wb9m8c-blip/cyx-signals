@@ -234,4 +234,5 @@ INTERACT/
 - 自定义滚动条样式
 - 等宽字体体系
 - 页面过渡使用 clip-path 动画（film wipe / vinyl reveal / wave sweep / signal rings）
+- 图片灯箱放大：CINEMA / CUT / GROOVE 页面所有图片点击可全屏放大查看，支持 ESC / 点击背景关闭
 - `prefers-reduced-motion` 响应支持
