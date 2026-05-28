@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>曹语轩 · 作品集</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --purple: #7B5EA7;
+    --purple-light: #f5f1fa;
+    --purple-mid: #b8a3d4;
+    --text: #222;
+    --text-dim: #666;
+    --text-light: #999;
+    --line: #e8e4ee;
+    --bg: #fff;
+    --warm: #c4a882;
+  }
+
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    background: #f0ece4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--bg);
+    margin-bottom: 20px;
+    padding: 18mm 16mm 16mm;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    box-shadow: 0 2px 20px rgba(0,0,0,.08);
+  }
+
+  /* ─── Typography ─── */
+  h1 { font-size: 42px; font-weight: 800; letter-spacing: .02em; line-height: 1.1; }
+  h2 { font-size: 18px; font-weight: 600; letter-spacing: .06em; }
+  h3 { font-size: 14px; font-weight: 600; letter-spacing: .04em; }
+  .mono { font-family: "SF Mono", "JetBrains Mono", "Consolas", monospace; }
+  .cn-serif { font-family: "Noto Serif SC", "STSong", "SimSun", serif; }
+
+  /* ─── Cover Page ─── */
+  .cover-layout { display: flex; flex-direction: column; height: 100%; position: relative; }
+  .cover-top { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cover-name { font-size: 56px; font-weight: 900; letter-spacing: .04em; line-height: 1.05; color: var(--text); }
+  .cover-name-en { font-size: 16px; font-weight: 500; color: var(--purple); letter-spacing: .25em; margin-top: 6px; }
+  .cover-tagline { font-size: 15px; color: var(--text-dim); letter-spacing: .06em; margin-top: 18px; line-height: 1.7; }
+  .cover-divider { width: 48px; height: 3px; background: var(--purple); margin: 24px 0; }
+  .cover-meta { display: flex; gap: 32px; margin-top: 20px; flex-wrap: wrap; }
+  .cover-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .cover-meta-label { font-size: 8px; color: var(--text-light); letter-spacing: .15em; text-transform: uppercase; }
+  .cover-meta-value { font-size: 12px; color: var(--text); letter-spacing: .03em; }
+  .cover-abstract { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 120px; background: var(--line); }
+  .cover-corner { position: absolute; bottom: 0; right: 0; width: 60px; height: 60px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  /* ─── Section Headers ─── */
+  .sec-num { font-size: 10px; color: var(--purple); letter-spacing: .2em; font-weight: 600; }
+  .sec-title { font-size: 22px; font-weight: 700; letter-spacing: .03em; color: var(--text); margin-top: 4px; }
+  .sec-line { width: 32px; height: 2px; background: var(--purple); margin: 12px 0 20px; }
+
+  /* ─── Timeline ─── */
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content: ''; position: absolute; left: 5px; top: 4px; bottom: 4px; width: 1px; background: var(--line); }
+  .tl-item { position: relative; margin-bottom: 16px; padding-left: 16px; }
+  .tl-item::before { content: ''; position: absolute; left: -18px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--bg); border: 2px solid var(--purple); }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-date { font-size: 9px; color: var(--text-light); letter-spacing: .1em; }
+  .tl-heading { font-size: 13px; font-weight: 600; color: var(--text); margin-top: 2px; }
+  .tl-desc { font-size: 10px; color: var(--text-dim); line-height: 1.7; margin-top: 3px; }
+
+  /* ─── Project Cards ─── */
+  .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .proj-card { border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px; transition: all .2s; }
+  .proj-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .proj-card-num { font-size: 10px; color: var(--purple); letter-spacing: .12em; font-weight: 600; }
+  .proj-card-title { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: .02em; }
+  .proj-card-desc { font-size: 9.5px; color: var(--text-dim); line-height: 1.65; }
+  .proj-card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+  .proj-tag { font-size: 8px; padding: 2px 8px; border-radius: 2px; background: var(--purple-light); color: var(--purple); letter-spacing: .04em; }
+
+  /* ─── Skills Matrix ─── */
+  .skills-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .skill-pill { font-size: 10px; padding: 5px 12px; border: 1px solid var(--line); border-radius: 20px; color: var(--text-dim); letter-spacing: .03em; }
+
+  /* ─── Side Note ─── */
+  .side-note { font-size: 9px; color: var(--text-light); border-left: 2px solid var(--purple-mid); padding-left: 10px; font-style: italic; line-height: 1.6; }
+
+  /* ─── Column Layout ─── */
+  .col2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .col2-uneven { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; }
+  .col3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ─── Stat Numbers ─── */
+  .stat-row { display: flex; gap: 32px; margin: 16px 0; }
+  .stat-item { display: flex; flex-direction: column; }
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--purple); letter-spacing: .02em; }
+  .stat-label { font-size: 9px; color: var(--text-light); letter-spacing: .08em; margin-top: 2px; }
+
+  /* ─── Divider ─── */
+  .dot-divider { display: flex; gap: 6px; margin: 20px 0; }
+  .dot-divider span { width: 3px; height: 3px; border-radius: 50%; background: var(--line); }
+
+  /* ─── Pipeline Flow ─── */
+  .pipeline { display: flex; gap: 0; align-items: center; margin: 16px 0; }
+  .pipe-step { flex: 1; text-align: center; padding: 12px 8px; border: 1px solid var(--line); position: relative; }
+  .pipe-step:not(:last-child)::after { content: '→'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); color: var(--purple-mid); font-size: 12px; z-index: 1; }
+  .pipe-step-icon { font-size: 16px; margin-bottom: 4px; }
+  .pipe-step-name { font-size: 10px; font-weight: 600; color: var(--text); }
+  .pipe-step-desc { font-size: 8px; color: var(--text-light); margin-top: 2px; }
+
+  /* ─── Quote Block ─── */
+  .insight-block { background: var(--purple-light); border-left: 3px solid var(--purple); padding: 14px 18px; margin: 16px 0; border-radius: 0 4px 4px 0; }
+  .insight-block p { font-size: 10.5px; color: #4a3a5e; line-height: 1.7; }
+
+  /* ─── Contact Strip ─── */
+  .contact-strip { display: flex; gap: 24px; align-items: center; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 20px; }
+  .contact-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--text-dim); }
+  .contact-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
+
+  /* ─── Back Page ─── */
+  .back-page { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; }
+  .back-symbol { font-size: 48px; color: var(--purple-mid); margin-bottom: 20px; }
+  .back-quote { font-size: 14px; color: var(--text-dim); letter-spacing: .06em; line-height: 2; }
+  .back-quote em { color: var(--purple); font-style: normal; }
+
+  /* ─── Page number ─── */
+  .page-num { position: absolute; bottom: 10mm; right: 14mm; font-size: 8px; color: var(--text-light); letter-spacing: .1em; }
+
+  /* Print */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; margin: 0; page-break-after: always; }
+  }
+
+  /* Accent text */
+  .accent { color: var(--purple); }
+  .warm { color: var(--warm); }
+  .dim { color: var(--text-dim); }
+  .small { font-size: 9px; }
+  .bold { font-weight: 700; }
+
+  /* Info row */
+  .info-row { display: flex; gap: 40px; margin-top: 12px; }
+  .info-col { display: flex; flex-direction: column; gap: 6px; }
+  .info-label { font-size: 8px; color: var(--text-light); letter-spacing: .15em; }
+  .info-value { font-size: 11px; color: var(--text); }
+
+  /* Decorative circle */
+  .deco-circle { position: absolute; border-radius: 50%; border: 1px solid var(--line); pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PAGE 1: COVER ═══════════ -->
+<div class="page">
+  <div class="cover-layout">
+    <div class="cover-top">
+      <div class="sec-num">PORTFOLIO / 2026</div>
+      <div style="margin-top: 48px;">
+        <div class="cover-name">曹语轩</div>
+        <div class="cover-name-en">CAO YUXUAN</div>
+      </div>
+      <div class="cover-divider"></div>
+      <div class="cover-tagline">
+        音视频模型数据策略产品<br>
+        新闻传播学硕士 · INTJ · 视听叙事
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">Location</span>
+          <span class="cover-meta-value">天津 · 南开大学</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">Email</span>
+          <span class="cover-meta-value">xiaoxuannixingfuma@163.com</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">Phone</span>
+          <span class="cover-meta-value">191 1892 9672</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">Status</span>
+          <span class="cover-meta-value" style="color:var(--purple);">● OPEN · 可实习六个月</span>
+        </div>
+      </div>
+    </div>
+    <div class="deco-circle" style="width:180px;height:180px;top:-40px;right:-60px;"></div>
+    <div class="deco-circle" style="width:100px;height:100px;bottom:20px;left:-30px;"></div>
+    <div class="page-num">01 / 06</div>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE 2: ABOUT + SKILLS ═══════════ -->
+<div class="page">
+  <div class="sec-num">00 / ABOUT</div>
+  <div class="sec-title">关于我</div>
+  <div class="sec-line"></div>
+
+  <div class="col2" style="margin-top: 16px;">
+    <div>
+      <h3 style="margin-bottom: 10px;">教育背景</h3>
+      <div style="font-size:13px;color:var(--text);font-weight:600;">南开大学</div>
+      <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">新闻传播学 · 硕士</div>
+      <div style="font-size:10px;color:var(--text-light);margin-top:2px;">视听叙事方向</div>
+
+      <h3 style="margin-top: 24px;margin-bottom: 10px;">求职意向</h3>
+      <div style="font-size:13px;color:var(--purple);font-weight:600;">音视频模型数据策略产品岗</div>
+      <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.6;">AI Video Product · Content Tech<br>Creative Tooling · 可实习六个月</div>
+
+      <h3 style="margin-top: 24px;margin-bottom: 10px;">核心能力</h3>
+      <div class="skills-row">
+        <span class="skill-pill">AI视频生成</span>
+        <span class="skill-pill">Prompt Engineering</span>
+        <span class="skill-pill">产品规划</span>
+        <span class="skill-pill">数据策略</span>
+        <span class="skill-pill">用户研究</span>
+        <span class="skill-pill">竞品分析</span>
+        <span class="skill-pill">跨部门协调</span>
+        <span class="skill-pill">技术选型</span>
+        <span class="skill-pill">AIGC管线设计</span>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom: 10px;">工具 & 技术栈</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div>
+          <span style="font-size:10px;color:var(--text-light);letter-spacing:.06em;">AI 视频模型</span><br>
+          <span style="font-size:11px;color:var(--text);">Kling Omni 3.0 · Runway Veo3 · Seedance 2.0</span>
+        </div>
+        <div>
+          <span style="font-size:10px;color:var(--text-light);letter-spacing:.06em;">AI 音频 & 语音</span><br>
+          <span style="font-size:11px;color:var(--text);">声网凤鸣AI · ASR引擎 · 音频SDK集成</span>
+        </div>
+        <div>
+          <span style="font-size:10px;color:var(--text-light);letter-spacing:.06em;">数据分析</span><br>
+          <span style="font-size:11px;color:var(--text);">回归分析 · 用户留存建模 · 指标体系搭建</span>
+        </div>
+        <div>
+          <span style="font-size:10px;color:var(--text-light);letter-spacing:.06em;">产品工具</span><br>
+          <span style="font-size:11px;color:var(--text);">PRD撰写 · 原型设计 · 项目排期 · SDK接入</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; padding:14px 16px; border:1px solid var(--line); border-radius:4px;">
+        <span style="font-size:9px;color:var(--text-light);letter-spacing:.1em;">数据亮点</span>
+        <div class="stat-row" style="margin:10px 0 0;">
+          <div class="stat-item">
+            <span class="stat-num">12万</span>
+            <span class="stat-label">DAU 峰值</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">2000万</span>
+            <span class="stat-label">话题阅读量</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">45%</span>
+            <span class="stat-label">次日留存</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">02 / 06</div>
+</div>
+
+<!-- ═══════════ PAGE 3-4: CINEMA PROJECT ═══════════ -->
+<div class="page">
+  <div class="sec-num">01 / PROJECT</div>
+  <div class="sec-title">部委直属单位 AI 一镜到底 MV 宣传片</div>
+  <div class="sec-line"></div>
+
+  <div class="col2" style="margin-bottom: 16px;">
+    <div>
+      <div class="info-row">
+        <div class="info-col">
+          <span class="info-label">TYPE</span>
+          <span class="info-value">AI MV 宣传片</span>
+        </div>
+        <div class="info-col">
+          <span class="info-label">ROLE</span>
+          <span class="info-value accent bold">AI 视频产品负责人</span>
+        </div>
+        <div class="info-col">
+          <span class="info-label">PERIOD</span>
+          <span class="info-value">2025.03 — 2025.06</span>
+        </div>
+      </div>
+      <p style="font-size:10px;color:var(--text-dim);line-height:1.7;margin-top:12px;">
+        面向高规格官方宣发需求，为部委直属单位打造AI驱动的一镜到底MV宣传片。采用AI生成+人工精修混合管线，从主题拆解到视听交付全流程探索AI在官方宣传影像中的表达边界。成片3分12秒，全片41个AI生成镜头段落，零后期剪辑断裂点。
+      </p>
+    </div>
+    <div class="side-note">
+      核心挑战：保持一镜到底的时空连续性与官方视觉语言的庄重克制之间的平衡。
+    </div>
+  </div>
+
+  <h3 style="margin-bottom: 12px;">制作管线 · 五阶段流程</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">01 CONCEPT</div>
+      <div class="tl-heading">主题拆解</div>
+      <div class="tl-desc">围绕宣发核心诉求，提炼"守护""防线""秩序"三大视觉关键词，构建情绪曲线与画面节奏对照表。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">02 SHOT MAP</div>
+      <div class="tl-heading">一镜到底路径规划</div>
+      <div class="tl-desc">设计单镜头贯穿全片的运动轨迹，包含7个空间转换节点，每个节点镜头加速度与画面情绪同步。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">03 MODEL TEST</div>
+      <div class="tl-heading">模型评估与选型</div>
+      <div class="tl-desc">横向对比 Runway Veo3、Kling 3.0系列、Seedance 等多款视频生成模型。评估运动一致性、光影稳定性、视觉适配度。最终选定 Kling Omni 3.0 为主力模型。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">04 PROMPT LAB</div>
+      <div class="tl-heading">提示词工程</div>
+      <div class="tl-desc">建立三层提示词体系（场景骨架→视觉风格→细粒度控制），单场景平均4.8轮迭代，建立可复用Prompt模板库28组。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">05 FINAL CUT</div>
+      <div class="tl-heading">视听交付</div>
+      <div class="tl-desc">整合AI生成段落与实拍素材，完成色彩一致性校正与音频空间化混音。输出9:16竖版与16:9横版双版本。</div>
+    </div>
+  </div>
+
+  <div class="page-num">03 / 06</div>
+</div>
+
+<!-- ═══════════ PAGE 4-5: GROOVE / 芒果TV ═══════════ -->
+<div class="page">
+  <div class="sec-num">02 / INTERNSHIP</div>
+  <div class="sec-title">芒果TV · 产品实习档案</div>
+  <div class="sec-line"></div>
+
+  <div class="info-row" style="margin-bottom: 16px;">
+    <div class="info-col">
+      <span class="info-label">COMPANY</span>
+      <span class="info-value">芒果TV · 音乐频道</span>
+    </div>
+    <div class="info-col">
+      <span class="info-label">PRODUCT</span>
+      <span class="info-value">合唱团 · K歌弹幕</span>
+    </div>
+    <div class="info-col">
+      <span class="info-label">PERIOD</span>
+      <span class="info-value">2024.05 — 2024.09</span>
+    </div>
+    <div class="info-col">
+      <span class="info-label">ROLE</span>
+      <span class="info-value accent bold">产品实习生</span>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">OVERTURE · 2024.05 — 2024.06</div>
+      <div class="tl-heading">序曲：初创统筹</div>
+      <div class="tl-desc">入职首周接手合唱团产品初期调研，梳理芒果TV音乐频道用户画像，分析竞品差异点，形成12页竞品报告。主导完成「K歌弹幕」核心玩法产品定义——将弹幕从文字升级为声音，实现'万人同唱'的沉浸听感。跨部门协调播放器组、运营组、设计组三方资源，2周内完成PRD撰写和首版原型。</div>
+      <div class="proj-card-tags">
+        <span class="proj-tag">产品规划</span><span class="proj-tag">竞品分析</span><span class="proj-tag">跨部门协调</span><span class="proj-tag">PRD撰写</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">MARCH · 2024.06 — 2024.07</div>
+      <div class="tl-heading">进行曲：技术攻坚</div>
+      <div class="tl-desc">发现播放器组方案存在严重缺陷（崩溃率8%，音频延迟>300ms），主动推动采购声网「凤鸣AI」音频引擎。核心指标：音频同步延迟<50ms，SDK稳定性>99.5%。编写接入指南，将4周接入周期压缩至10天，录制200条测试音频用于AI评分调参。最终崩溃率降至0.3%，音频延迟降至40ms以内。</div>
+      <div class="proj-card-tags">
+        <span class="proj-tag">技术选型</span><span class="proj-tag">供应商评估</span><span class="proj-tag">SDK接入</span><span class="proj-tag">测试管理</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">CHORUS · 2024.07 — 2024.09</div>
+      <div class="tl-heading">副歌：运营推广</div>
+      <div class="tl-desc">联动《时光音乐会3》策划「超女时代金曲返场」主题活动。四阶段推广链条：返场公投（30万用户投票）→ 演唱打榜 → 原唱演绎 → 同屏接唱。DAU从0增长至12万，单曲最高合唱次数突破8万次。协调法务团队解决超女歌曲版权问题，话题阅读量破2000万。</div>
+      <div class="proj-card-tags">
+        <span class="proj-tag">整合营销</span><span class="proj-tag">用户增长</span><span class="proj-tag">版权协调</span><span class="proj-tag">活动策划</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">FINALE · 2024.09 — 至今</div>
+      <div class="tl-heading">尾声：数据复盘</div>
+      <div class="tl-desc">建立核心指标体系（次日留存45%/7日留存22%/合唱完成率68%/分享率31%）。撰写28页复盘报告，核心发现：UGC内容的情感密度比技术完美度更能预测传播力。报告被产品VP评为「年度最具洞察力的实习作品」，指标体系被纳入日常监控看板。</div>
+      <div class="proj-card-tags">
+        <span class="proj-tag">数据分析</span><span class="proj-tag">用户研究</span><span class="proj-tag">策略规划</span><span class="proj-tag">报告撰写</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">04 / 06</div>
+</div>
+
+<!-- ═══════════ PAGE 5: CUT / Vibecoding ═══════════ -->
+<div class="page">
+  <div class="sec-num">03 / PROJECT</div>
+  <div class="sec-title">Vibecoding作品 — 文化类AI分类式自动优化剪辑工具</div>
+  <div class="sec-line"></div>
+
+  <p style="font-size:10px;color:var(--text-dim);line-height:1.7;margin-bottom:16px;">
+    基于四层AI管线（感知层→认知层→行动层→反思层）的智能剪辑系统，针对深度访谈、新闻圆桌、播客对话三类场景实现从原始素材到成片的自动化处理。核心创新：反思层的记忆反馈机制，确保多轮迭代中约束不衰减。
+  </p>
+
+  <h3 style="margin-bottom: 12px;">四层AI管线架构</h3>
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="pipe-step-icon">◉</div>
+      <div class="pipe-step-name">感知层</div>
+      <div class="pipe-step-desc">ASR识别 · 说话人分离<br>话题检测 · 静默标记</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-step-icon">◎</div>
+      <div class="pipe-step-name">认知层</div>
+      <div class="pipe-step-desc">动态模板加载<br>剪辑策略生成</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-step-icon">◈</div>
+      <div class="pipe-step-name">行动层</div>
+      <div class="pipe-step-desc">EDL构建<br>多格式渲染输出</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-step-icon">↻</div>
+      <div class="pipe-step-name">反思层</div>
+      <div class="pipe-step-desc">记忆反馈机制<br>约束继承与优化</div>
+    </div>
+  </div>
+
+  <h3 style="margin: 20px 0 10px;">三类剪辑场景</h3>
+  <div class="project-grid">
+    <div class="proj-card">
+      <div class="proj-card-header">
+        <span class="proj-card-num">CASE 01</span>
+        <span class="proj-card-title">深度访谈</span>
+      </div>
+      <div class="proj-card-desc">单人情感叙事型 · 2h48min→22min<br>保留34处静默作为高情感密度段落</div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:6px;line-height:1.5;">
+        ASR精度 98.7% · 7个EDL段落 · 3轮迭代<br>情感密度评分 +22%
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-card-header">
+        <span class="proj-card-num">CASE 02</span>
+        <span class="proj-card-title">新闻圆桌</span>
+      </div>
+      <div class="proj-card-desc">多人话题辩论型 · 1h35min→16min<br>4人同时发言，按话题切换自动分段</div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:6px;line-height:1.5;">
+        ASR精度 96.4% · 5个EDL段落 · 2轮迭代<br>观点完整度 +27%
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-card-header">
+        <span class="proj-card-num">CASE 03</span>
+        <span class="proj-card-title">播客对话</span>
+      </div>
+      <div class="proj-card-desc">双人话题漫游型 · 3h12min→35min<br>构建对话树，由粗到细多话题提取</div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:6px;line-height:1.5;">
+        ASR精度 97.8% · 9个EDL段落 · 3轮迭代<br>话题覆盖度 +34%
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 16px;">
+    <h3 style="margin-bottom: 8px;">反思层 · 记忆机制对比</h3>
+    <div style="display:flex;gap:16px;">
+      <div style="flex:1;padding:12px;border:1px solid var(--line);border-radius:4px;text-align:center;">
+        <div style="font-size:10px;color:var(--text-dim);">无记忆机制</div>
+        <div style="display:flex;align-items:flex-end;gap:8px;height:40px;justify-content:center;margin:10px 0;">
+          <div style="width:14px;height:45%;background:#ccc;border-radius:2px;"></div>
+          <div style="width:14px;height:38%;background:#ccc;border-radius:2px;"></div>
+          <div style="width:14px;height:22%;background:#ccc;border-radius:2px;"></div>
+        </div>
+        <div style="font-size:9px;color:#c44;">约束衰减 ✗</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-dim);display:flex;align-items:center;">VS</div>
+      <div style="flex:1;padding:12px;border:1px solid var(--purple);border-radius:4px;text-align:center;background:var(--purple-light);">
+        <div style="font-size:10px;color:var(--purple);font-weight:600;">有记忆机制</div>
+        <div style="display:flex;align-items:flex-end;gap:8px;height:40px;justify-content:center;margin:10px 0;">
+          <div style="width:14px;height:45%;background:var(--purple-mid);border-radius:2px;"></div>
+          <div style="width:14px;height:72%;background:var(--purple);border-radius:2px;"></div>
+          <div style="width:14px;height:94%;background:var(--purple);border-radius:2px;"></div>
+        </div>
+        <div style="font-size:9px;color:var(--purple);">约束全继承 ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">05 / 06</div>
+</div>
+
+<!-- ═══════════ PAGE 6: CONTACT + CLOSING ═══════════ -->
+<div class="page">
+  <div class="back-page">
+    <div class="back-symbol">◉</div>
+    <div style="font-size:28px;font-weight:800;letter-spacing:.04em;color:var(--text);">曹语轩 CAO YUXUAN</div>
+    <div style="font-size:12px;color:var(--purple);letter-spacing:.15em;margin-top:8px;">SIGNAL LOCKED</div>
+
+    <div style="margin-top: 40px;">
+      <div class="contact-strip" style="flex-direction:column;gap:12px;border:none;">
+        <div class="contact-item"><span class="contact-dot"></span> xiaoxuannixingfuma@163.com</div>
+        <div class="contact-item"><span class="contact-dot"></span> 191 1892 9672</div>
+        <div class="contact-item"><span class="contact-dot"></span> 天津 · 南开大学</div>
+        <div class="contact-item"><span class="contact-dot" style="animation:pulse 2s infinite;"></span> 音视频模型数据策略产品岗 · 可实习六个月</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px;padding:20px 32px;border:1px solid var(--line);border-radius:4px;text-align:center;">
+      <div style="font-size:8px;color:var(--text-light);letter-spacing:.2em;margin-bottom:8px;">SIGNAL CHANNELS</div>
+      <div style="display:flex;gap:24px;justify-content:center;">
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:var(--text);font-weight:600;">小红书</div>
+          <div style="font-size:8px;color:var(--text-light);">情绪价值 · 图文种草</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:var(--text);font-weight:600;">抖音</div>
+          <div style="font-size:8px;color:var(--text-light);">强钩子 · 高互动</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:var(--text);font-weight:600;">B站</div>
+          <div style="font-size:8px;color:var(--text-light);">长内容 · 深度解释</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:var(--text);font-weight:600;">视频号</div>
+          <div style="font-size:8px;color:var(--text-light);">社交转发 · 稳定触达</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <p class="back-quote" style="font-family: 'Noto Serif SC', 'STSong', serif;color:#ccc;">
+        声音从这里出发<br>在某处等待<em>共鸣</em>
+      </p>
+    </div>
+  </div>
+  <div class="page-num">06 / 06</div>
+</div>
+
+</body>
+</html>
